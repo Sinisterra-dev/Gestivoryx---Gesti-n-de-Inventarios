@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestivoryx | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="assets/css/login.css" />
+  </head>
+  <body class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <!-- Tu logo -->
+        <img src="assets/img/gestivoryxblanco.png" alt="Gestivoryx" class="logo-login" />
+      </div>
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Inicia sesión para empezar</p>
+          <form id="formLogin" action="admin.html" method="get">
+            <div class="form-group">
+              <label for="usuario">Usuario</label>
+              <input
+                type="text"
+                id="usuario"
+                name="usuario"
+                class="form-control"
+                placeholder="Usuario"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Entrar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="assets/js/main.js"></script>
+    <!-- Si quieres un login.js aparte -->
+    <script src="assets/js/login.js"></script>
+    <!-- <script src="assets/js/login.js"></script> -->
+  </body>
+</html>

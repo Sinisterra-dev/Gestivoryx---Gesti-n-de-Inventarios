@@ -1,0 +1,1105 @@
+/* Estilos específicos para el dashboard */
+
+/* Barra superior */
+.navbar {
+    background-color: #f0f2ff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 0.5rem 1rem;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenedor principal del navbar */
+.navbar > .navbar-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Contenedor de elementos de la derecha */
+.navbar-nav.ml-auto {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+
+/* Elementos del navbar */
+.nav-item {
+    list-style: none;
+    margin-left: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Enlaces del navbar */
+.nav-link {
+    color: #4b5563;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    height: 100%;
+}
+
+/* Modificación para el texto del usuario en el sidebar */
+.sidebar .nav-link {
+    color: #ffffff !important;
+}
+
+.sidebar .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Modificación para el texto del usuario en la barra superior */
+.navbar .user-menu .nav-link {
+    color: #333 !important;
+}
+
+.navbar .user-menu .nav-link:hover {
+    color: #000 !important;
+}
+
+/* Menú desplegable */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 0.85rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #f8f9fa;
+    color: #dc3545;
+}
+
+/* Notificaciones */
+.navbar .fa-bell {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+.navbar .badge-warning {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.6rem;
+    padding: 0.25rem 0.4rem;
+    background-color: #ffc107 !important;
+    border-radius: 50%;
+}
+
+/* Menú de usuario */
+.user-menu {
+    margin-left: 10px;
+}
+
+.user-menu .nav-link {
+    padding: 0.25rem 0.5rem;
+}
+
+.user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+}
+
+.user-name {
+    margin-right: 5px;
+    white-space: nowrap;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .user-name {
+        display: none;
+    }
+    
+    .navbar {
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+}
+
+/* Ajuste del contenido principal para que no quede debajo del navbar fijo */
+.content-wrapper {
+    margin-top: 60px;
+    padding: 20px;
+    transition: margin 0.3s ease-in-out;
+}
+
+/* Ajustes de tipografía */
+body {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+
+/* Estilos para el menú lateral */
+.main-sidebar {
+    background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 50px;
+    height: 100vh;
+    width: 250px;
+    z-index: 1038;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+/* Logo y marca */
+.brand-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-link:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.brand-logo {
+    height: 30px;
+    width: auto;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.brand-text {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+/* Panel de usuario */
+.user-panel {
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.user-avatar {
+    margin-right: 15px;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.user-details {
+    line-height: 1.4;
+}
+
+.user-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Menú de navegación */
+.nav-sidebar {
+    padding: 10px 0;
+}
+
+.nav-sidebar .nav-item {
+    margin-bottom: 2px;
+}
+
+.nav-sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 12px 20px;
+    margin: 0 10px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.nav-sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-sidebar .nav-icon {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+    color: inherit;
+}
+
+.nav-sidebar p {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Encabezado de sección */
+.nav-header {
+    padding: 10px 25px 10px 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Efecto hover para los ítems del menú */
+.nav-sidebar .nav-item > .nav-link:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+/* Estilos para el botón de menú en móviles */
+.navbar-nav .nav-link[data-widget="pushmenu"] {
+    color: #4b3b8c;
+    font-size: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link[data-widget="pushmenu"]:hover {
+    color: #2d2254;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 991.98px) {
+    .main-sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar-open .main-sidebar {
+        transform: translateX(0);
+    }
+    
+    .content-wrapper {
+        margin-left: 0;
+    }
+    
+    .navbar-nav .nav-link[data-widget="pushmenu"] {
+        color: #fff;
+    }
+    
+    .navbar-nav .nav-link[data-widget="pushmenu"]:hover {
+        color: #e0e0e0;
+    }
+}
+
+/* Estilos para el contenido principal */
+.content-wrapper {
+    margin-left: 250px;
+    min-height: 100vh;
+    transition: margin 0.3s ease-in-out;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+/* Transición suave para el menú */
+.nav-sidebar .nav-link,
+.nav-sidebar .nav-icon,
+.user-info {
+    transition: all 0.3s ease;
+}
+
+/* Ajustes generales */
+body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Estilos para el menú lateral */
+.nav-sidebar {
+    padding: 10px 0;
+}
+
+.nav-sidebar .nav-item > .nav-link {
+    margin-bottom: 5px;
+    padding: 0.5rem 1rem;
+    color: #c2c7d0;
+    border-left: 3px solid transparent;
+}
+
+.nav-sidebar .nav-item > .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-sidebar .nav-item > .nav-link.active {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-left-color: #007bff;
+}
+
+.nav-sidebar .nav-icon {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    color: inherit;
+}
+
+.nav-header {
+    padding: 10px 25px;
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Estilos generales para el sidebar */
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1030;
+    width: 250px;
+    padding-top: 60px;
+    background-color: #343a40;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+/* Encabezado del sidebar con degradado */
+.sidebar-header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    padding: 15px 20px;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Estilos para los ítems del menú */
+.nav-sidebar {
+    padding: 10px 0;
+}
+
+.nav-sidebar .nav-header {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    color: #adb5bd;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.nav-sidebar .nav-item > .nav-link {
+    color: #c2c7d0;
+    margin: 2px 10px;
+    border-radius: 4px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-sidebar .nav-item > .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: #007bff;
+    color: #fff !important;
+}
+
+.nav-sidebar .nav-icon {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+    color: inherit;
+}
+
+/* Estilos para los submenús */
+.nav-sidebar .nav-treeview {
+    padding-left: 15px;
+}
+
+.nav-sidebar .nav-treeview .nav-link {
+    padding: 8px 15px 8px 40px;
+    font-size: 0.9rem;
+    color: #adb5bd;
+    position: relative;
+}
+
+.nav-sidebar .nav-treeview .nav-link:before {
+    content: '»';
+    position: absolute;
+    left: 20px;
+    color: #6c757d;
+}
+
+.nav-sidebar .nav-treeview .nav-link.active {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Estilos para el menú colapsado */
+.sidebar-collapse .main-sidebar {
+    transform: translateX(-250px);
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 991.98px) {
+    .main-sidebar {
+        transform: translateX(-250px);
+    }
+    
+    .sidebar-open .main-sidebar {
+        transform: translateX(0);
+    }
+    
+    .content-wrapper {
+        margin-left: 0;
+    }
+}
+
+/* Estilos para el contenido principal */
+.content-wrapper {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin 0.3s ease-in-out;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+}
+
+.sidebar-collapse .content-wrapper {
+    margin-left: 0;
+}
+
+/* Estilos para las tarjetas */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 20px;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #343a40;
+}
+
+/* Estilos para los botones */
+.btn {
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    border-color: #2653d4;
+}
+
+.btn-info {
+    background-color: #36b9cc;
+    border-color: #36b9cc;
+}
+
+.btn-info:hover {
+    background-color: #2c9faf;
+    border-color: #2a96a5;
+}
+
+.btn-warning {
+    background-color: #f6c23e;
+    border-color: #f6c23e;
+}
+
+.btn-warning:hover {
+    background-color: #e4b11a;
+    border-color: #d8aa19;
+}
+
+/* Estilos para los formularios */
+.form-control {
+    border: 1px solid #d1d3e2;
+    border-radius: 4px;
+    padding: 8px 12px;
+    height: calc(2.25rem + 2px);
+}
+
+.form-control:focus {
+    border-color: #bac8f3;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Estilos para el menú de usuario en la barra superior */
+.user-menu .user-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 5px;
+    float: left;
+}
+
+.user-menu .dropdown-toggle::after {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.user-menu .dropdown-menu {
+    width: 280px;
+    padding: 0;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.user-menu .user-header {
+    padding: 15px;
+    text-align: center;
+    background: linear-gradient(45deg, #4b3b8c, #2d2254);
+    color: #fff;
+}
+
+.user-menu .user-header img {
+    width: 80px;
+    height: 80px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.user-menu .user-header p {
+    margin: 0;
+    padding: 0 5px 5px;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.user-menu .user-header p small {
+    display: block;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.user-menu .user-body {
+    padding: 15px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.user-menu .user-footer {
+    padding: 10px;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-menu .btn-flat {
+    color: #444;
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.user-menu .btn-flat:hover {
+    background-color: #e9ecef;
+}
+
+.user-menu .btn-flat.float-right {
+    float: right;
+}
+
+/* Estilos para el indicador de notificaciones */
+.navbar-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.7rem;
+    font-weight: 300;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+/* Ajustes para las tarjetas */
+.card {
+    margin-bottom: 20px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 0.5rem rgba(0,0,0,.05);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Ajustes para las tablas */
+.table {
+    font-size: 0.85rem;
+}
+
+.table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ajustes para los botones */
+.btn {
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Ajustes para los badges */
+.badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.35em 0.65em;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .main-footer {
+        left: 0;
+        text-align: center;
+    }
+    
+    .content-wrapper {
+        margin-top: 50px;
+        padding: 10px;
+    }
+    
+    .navbar {
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .user-menu .user-name {
+        display: none;
+    }
+}
+
+/* Tarjetas de resumen */
+.small-box {
+    border-radius: 0.5rem;
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.small-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+.small-box > .inner {
+    padding: 20px;
+    color: #fff;
+}
+
+.small-box h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+    color: #fff;
+}
+
+.small-box p {
+    font-size: 1rem;
+    margin: 0;
+    color: rgba(255,255,255,0.9);
+}
+
+.small-box .icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 0;
+    font-size: 70px;
+    color: rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+.small-box:hover .icon {
+    font-size: 75px;
+}
+
+.small-box-footer {
+    position: relative;
+    text-align: center;
+    padding: 8px 0;
+    color: rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.1);
+    text-decoration: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    display: block;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.small-box-footer:hover {
+    background: rgba(0,0,0,0.15);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Colores para las tarjetas */
+.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Tarjetas de contenido */
+.card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 0.5rem rgba(0,0,0,.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Tablas */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #fff;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+/* Botones de acción */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .small-box {
+        text-align: center;
+    }
+    
+    .small-box .icon {
+        display: none;
+    }
+    
+    .small-box h3 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Footer */
+.main-footer {
+    padding: 15px;
+    font-size: 0.85rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 250px;
+    z-index: 1000;
+}
+
+/* Ajustes para el contenido principal */
+.content {
+    padding-bottom: 60px; /* Para que el footer no tape el contenido */
+}
+
+/* Ajustes para las tarjetas */
+.card {
+    margin-bottom: 20px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 0.5rem rgba(0,0,0,.05);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Ajustes para las tablas */
+.table {
+    font-size: 0.85rem;
+}
+
+.table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Ajustes para los botones */
+.btn {
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Ajustes para los badges */
+.badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.35em 0.65em;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .main-footer {
+        left: 0;
+        text-align: center;
+    }
+    
+    .content-wrapper {
+        margin-top: 50px;
+        padding: 10px;
+    }
+    
+    .navbar {
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .user-menu .user-name {
+        display: none;
+    }
+}
