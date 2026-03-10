@@ -136,6 +136,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="clientes.html" class="nav-link">
+                                <i class="nav-icon fas fa-user-friends"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="ventas.html" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>Ventas</p>
@@ -391,12 +397,62 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
     <script src="assets/js/menu.js"></script>
 
-    <!-- Script para el gráfico -->
+    <!-- Script para el gráfico y dashboard -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (!requireAuth()) return;
+
+            // Bind logout
+            document.querySelectorAll('[href="login.html"]').forEach(el => {
+                el.addEventListener('click', (e) => { e.preventDefault(); logout(); });
+            });
+
+            // Load dashboard stats
+            try {
+                const stats = await api.get('/api/dashboard/stats');
+                if (stats) {
+                    document.querySelectorAll('.small-box')[0]?.querySelector('h3')?.textContent != null &&
+                        (document.querySelectorAll('.small-box')[0].querySelector('h3').textContent = stats.total_productos);
+                    document.querySelectorAll('.small-box')[1]?.querySelector('h3') &&
+                        (document.querySelectorAll('.small-box')[1].querySelector('h3').textContent = '$' + stats.ingresos_mes.toLocaleString('es-CO'));
+                    document.querySelectorAll('.small-box')[2]?.querySelector('h3') &&
+                        (document.querySelectorAll('.small-box')[2].querySelector('h3').textContent = stats.total_clientes);
+                    document.querySelectorAll('.small-box')[3]?.querySelector('h3') &&
+                        (document.querySelectorAll('.small-box')[3].querySelector('h3').textContent = stats.productos_bajo_stock);
+                    // Update p labels
+                    const boxes = document.querySelectorAll('.small-box');
+                    if (boxes[3]) boxes[3].querySelector('p').textContent = 'Bajo stock';
+                }
+            } catch(e) { console.warn('Stats error:', e); }
+
+            // Load recent sales
+            try {
+                const ventas = await api.get('/api/ventas/');
+                if (ventas && ventas.length) {
+                    const tbody = document.querySelector('.table tbody');
+                    if (tbody) {
+                        tbody.innerHTML = '';
+                        ventas.slice(0, 5).forEach(v => {
+                            const tr = document.createElement('tr');
+                            const estadoBadge = v.estado === 'completada'
+                                ? '<span class="badge bg-success">Completado</span>'
+                                : '<span class="badge bg-danger">Anulado</span>';
+                            tr.innerHTML = `
+                                <td>${v.numero}</td>
+                                <td>${v.cliente ? v.cliente.nombre : 'Consumidor final'}</td>
+                                <td>${v.detalles.length} producto(s)</td>
+                                <td>$${v.total.toLocaleString('es-CO')}</td>
+                                <td>${estadoBadge}</td>
+                                <td><a href="ventas.html" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a></td>`;
+                            tbody.appendChild(tr);
+                        });
+                    }
+                }
+            } catch(e) { console.warn('Ventas error:', e); }
+
             // Gráfico de ventas
             var ctx = document.getElementById('salesChart').getContext('2d');
             var salesChart = new Chart(ctx, {
@@ -404,7 +460,7 @@
                 data: {
                     labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
                     datasets: [{
-                        label: 'Ventas 2023',
+                        label: 'Ventas ' + new Date().getFullYear(),
                         data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 32000, 29000, 35000, 40000, 45000],
                         backgroundColor: 'rgba(60, 141, 188, 0.2)',
                         borderColor: 'rgba(60, 141, 188, 1)',
@@ -417,37 +473,15 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        title: {
-                            display: false
-                        }
+                        legend: { display: true, position: 'top' },
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return '$' + value.toLocaleString();
-                                }
-                            }
+                            ticks: { callback: (v) => '$' + v.toLocaleString() }
                         }
                     }
                 }
-            });
-
-            // Inicializar el menú desplegable
-            var dropdownElementList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'))
-            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
-                return new bootstrap.Dropdown(dropdownToggleEl)
-            });
-
-            // Evento para el botón de cerrar sesión
-            document.querySelector('.logout-btn').addEventListener('click', function() {
-                // Aquí iría la lógica para cerrar sesión
-                window.location.href = 'login.html';
             });
         });
     </script>
