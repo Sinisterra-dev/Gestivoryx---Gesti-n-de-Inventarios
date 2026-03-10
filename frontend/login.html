@@ -4,57 +4,83 @@
     <meta charset="UTF-8" />
     <title>Gestivoryx | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Estilos generales -->
     <link rel="stylesheet" href="assets/css/login.css" />
   </head>
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <!-- Tu logo -->
         <img src="assets/img/gestivoryxblanco.png" alt="Gestivoryx" class="logo-login" />
       </div>
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Inicia sesión para empezar</p>
-          <form id="formLogin" action="admin.html" method="get">
+          <p class="login-box-msg">Inicia sesión para continuar</p>
+          <div id="loginError" style="display:none;color:#dc3545;margin-bottom:10px;font-size:14px;text-align:center;"></div>
+          <form id="formLogin">
             <div class="form-group">
               <label for="usuario">Usuario</label>
-              <input
-                type="text"
-                id="usuario"
-                name="usuario"
-                class="form-control"
-                placeholder="Usuario"
-                required
-              />
+              <input type="text" id="usuario" name="usuario" class="form-control"
+                placeholder="Usuario" required autocomplete="username" />
             </div>
             <div class="form-group">
               <label for="password">Contraseña</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                class="form-control"
-                placeholder="••••••••"
-                required
-              />
+              <input type="password" id="password" name="password" class="form-control"
+                placeholder="••••••••" required autocomplete="current-password" />
             </div>
             <div class="row">
               <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" id="btnLogin" class="btn btn-primary btn-block">
                   Entrar
                 </button>
               </div>
             </div>
           </form>
+          <p style="margin-top:14px;font-size:12px;color:#999;text-align:center;">
+            Usuario por defecto: <strong>admin</strong> / <strong>admin123</strong>
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- JS -->
-    <script src="assets/js/main.js"></script>
-    <!-- Si quieres un login.js aparte -->
-    <script src="assets/js/login.js"></script>
-    <!-- <script src="assets/js/login.js"></script> -->
+    <script src="assets/js/api.js"></script>
+    <script>
+      // Redirect if already logged in
+      if (localStorage.getItem("gestivoryx_token")) {
+        window.location.href = "admin.html";
+      }
+
+      document.getElementById("formLogin").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById("btnLogin");
+        const errorEl = document.getElementById("loginError");
+        btn.disabled = true;
+        btn.textContent = "Iniciando…";
+        errorEl.style.display = "none";
+
+        const username = document.getElementById("usuario").value.trim();
+        const password = document.getElementById("password").value;
+
+        try {
+          const body = new URLSearchParams({ username, password });
+          const resp = await fetch(`${API_BASE}/api/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body,
+          });
+          const data = await resp.json();
+          if (!resp.ok) {
+            throw new Error(data.detail || "Credenciales incorrectas");
+          }
+          setToken(data.access_token);
+          setUser(data.usuario);
+          window.location.href = "admin.html";
+        } catch (err) {
+          errorEl.textContent = err.message;
+          errorEl.style.display = "block";
+          btn.disabled = false;
+          btn.textContent = "Entrar";
+        }
+      });
+    </script>
   </body>
 </html>
+

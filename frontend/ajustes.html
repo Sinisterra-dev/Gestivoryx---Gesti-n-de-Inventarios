@@ -131,6 +131,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="clientes.html" class="nav-link">
+                                <i class="nav-icon fas fa-user-friends"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="ventas.html" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>Ventas</p>
@@ -169,6 +175,34 @@
             <!-- Contenido principal -->
             <section class="content">
                 <div class="container-fluid">
+                    <!-- Ajustes de Inventario -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-success">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-boxes mr-2"></i>Movimientos de Inventario</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-success btn-sm"
+                                          onclick="document.getElementById('modalAjuste').style.display='block';document.getElementById('modalAjuste').classList.add('show')">
+                                            <i class="fas fa-plus"></i> Nuevo Movimiento
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive">
+                                    <table id="tablaAjustes" class="table table-bordered table-striped table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th><th>Producto</th><th>Tipo</th><th>Cantidad</th>
+                                                <th>Stock (antes → después)</th><th>Motivo</th><th>Fecha</th><th>Usuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Configuración General -->
@@ -189,6 +223,7 @@
                                         <div class="form-group">
                                             <label>Moneda</label>
                                             <select class="form-control">
+                                                <option>COP - Peso Colombiano</option>
                                                 <option>MXN - Peso Mexicano</option>
                                                 <option>USD - Dólar Americano</option>
                                                 <option>EUR - Euro</option>
@@ -224,46 +259,53 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <!-- Copia de Seguridad -->
-                            <div class="card card-warning">
-                                <div class="card-header">
-                                    <h3 class="card-title">Copia de Seguridad</h3>
-                                </div>
-                                <div class="card-body">
-                                    <p>Realice una copia de seguridad de la base de datos.</p>
-                                    <button class="btn btn-warning">
-                                        <i class="fas fa-download"></i> Descargar Respaldo
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
 
         <!-- Footer -->
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Versión</b> 1.0.0
-            </div>
-            <strong>Copyright &copy; 2023 <a href="#">Gestivoryx</a>.</strong> Todos los derechos reservados.
+            <div class="float-right d-none d-sm-block"><b>Versión</b> 1.0.0</div>
+            <strong>Copyright &copy; 2025 <a href="#">Gestivoryx</a>.</strong> Todos los derechos reservados.
         </footer>
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
     <script src="assets/js/menu.js"></script>
-    <script>
-        // Inicialización de componentes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar tooltips
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
+    <script src="assets/js/ajustes.js"></script>
+
+    <!-- Modal Nuevo Movimiento -->
+    <div class="modal fade" id="modalAjuste" tabindex="-1" style="display:none">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title"><i class="fas fa-exchange-alt mr-2"></i>Registrar Movimiento</h5>
+            <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <form id="formAjuste">
+          <div class="modal-body">
+            <div class="form-group"><label>Producto *</label><select id="movProducto" class="form-control" required></select></div>
+            <div class="form-group">
+              <label>Tipo *</label>
+              <select id="movTipo" class="form-control" required>
+                <option value="entrada">Entrada (suma al stock)</option>
+                <option value="salida">Salida (resta del stock)</option>
+                <option value="ajuste">Ajuste (establece el stock exacto)</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Cantidad *</label><input type="number" id="movCantidad" class="form-control" required min="1"></div>
+            <div class="form-group"><label>Motivo</label><input type="text" id="movMotivo" class="form-control" placeholder="Ej: Conteo físico, reposición..."></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save mr-1"></i>Registrar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 </body>
+
 
 </html>

@@ -136,6 +136,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="clientes.html" class="nav-link">
+                                <i class="nav-icon fas fa-user-friends"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="ventas.html" class="nav-link">
                                 <i class="nav-icon fas fa-shopping-cart"></i>
                                 <p>Ventas</p>
@@ -232,9 +238,11 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Lista de Productos</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
-                                            <i class="fas fa-plus"></i> Agregar Producto
+                                    <div class="card-tools d-flex gap-2" style="gap:8px">
+                                        <input type="text" id="searchProducto" class="form-control form-control-sm" placeholder="Buscar por nombre o código..." style="width:220px">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarProducto"
+                                          onclick="document.getElementById('modalAgregarProducto').style.display='block';document.getElementById('modalAgregarProducto').classList.add('show')">
+                                            <i class="fas fa-plus"></i> Agregar
                                         </button>
                                     </div>
                                 </div>
@@ -274,21 +282,73 @@
     </div>
 
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
     <script src="assets/js/menu.js"></script>
-    <script>
-        // Inicialización de componentes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar DataTable
-            $('#tablaProductos').DataTable({
-                "responsive": true,
-                "autoWidth": false,
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-                }
-            });
-        });
-    </script>
+    <script src="assets/js/productos.js"></script>
+
+    <!-- Modal Agregar Producto -->
+    <div class="modal fade" id="modalAgregarProducto" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title"><i class="fas fa-plus mr-2"></i>Agregar Producto</h5>
+            <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <form id="formAgregarProducto">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>Código *</label><input type="text" id="productCode" class="form-control" required placeholder="PROD001"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Nombre *</label><input type="text" id="productName" class="form-control" required></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Precio Compra</label><input type="number" id="productPriceCompra" class="form-control" min="0" step="0.01" value="0"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Precio Venta *</label><input type="number" id="productPrice" class="form-control" required min="0" step="0.01"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Stock inicial</label><input type="number" id="productStock" class="form-control" min="0" value="0"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Stock mínimo</label><input type="number" id="productStockMin" class="form-control" min="0" value="5"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Unidad</label><input type="text" id="productUnidad" class="form-control" placeholder="uds, kg, L..."></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Categoría</label><select id="productCategory" class="form-control"></select></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Proveedor</label><select id="productProveedor" class="form-control"></select></div></div>
+              <div class="col-12"><div class="form-group"><label>Descripción</label><textarea id="productDesc" class="form-control" rows="2"></textarea></div></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Guardar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Editar Producto -->
+    <div class="modal fade" id="modalEditarProducto" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title"><i class="fas fa-edit mr-2"></i>Editar Producto</h5>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+          </div>
+          <form id="formEditarProducto">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>Código</label><input type="text" id="editProductCode" class="form-control" readonly></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Nombre *</label><input type="text" id="editProductName" class="form-control" required></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Precio Compra</label><input type="number" id="editProductPriceCompra" class="form-control" min="0" step="0.01"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Precio Venta *</label><input type="number" id="editProductPrice" class="form-control" required min="0" step="0.01"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Stock</label><input type="number" id="editProductStock" class="form-control" min="0"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Stock mínimo</label><input type="number" id="editProductStockMin" class="form-control" min="0"></div></div>
+              <div class="col-md-4"><div class="form-group"><label>Unidad</label><input type="text" id="editProductUnidad" class="form-control"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Categoría</label><select id="editProductCategory" class="form-control"></select></div></div>
+              <div class="col-md-6"><div class="form-group"><label>Proveedor</label><select id="editProductProveedor" class="form-control"></select></div></div>
+              <div class="col-12"><div class="form-group"><label>Descripción</label><textarea id="editProductDesc" class="form-control" rows="2"></textarea></div></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-warning"><i class="fas fa-save mr-1"></i>Actualizar</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>
