@@ -1,0 +1,87 @@
+/* =====================================================================
+   Gestivoryx — Estilos complementarios al tema de Tailwind CSS
+   Cosas que Tailwind no puede manejar directamente como inline utilities
+   ===================================================================== */
+
+/* Importación de la fuente Inter desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Fuente base de la aplicación */
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* ── Ocultamiento de scrollbar manteniendo funcionalidad ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+/* ── Transición de la barra lateral en móviles ── */
+#sidebar {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* ── Animación del overlay de modales ── */
+.modal-overlay-enter {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Animación de entrada del diálogo del modal */
+.modal-dialog-enter {
+  animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Posicionamiento del contenedor de toasts ── */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+/* ── Mejora visual para filas de tabla al pasar el cursor ── */
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* ── Estilos para el indicador activo del menú lateral ── */
+.nav-item-active {
+  border-left: 2px solid #06B6D4;
+}
+
+/* ── Responsive: ocultar sidebar en móviles por defecto ── */
+@media (max-width: 768px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  .ml-64 {
+    margin-left: 0 !important;
+  }
+}

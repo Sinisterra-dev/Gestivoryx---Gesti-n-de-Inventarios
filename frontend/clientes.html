@@ -1,180 +1,645 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Gestivoryx | Clientes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/estilos.css">
-    <link rel="stylesheet" href="assets/css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestivoryx | Clientes</title>
+  <!-- Fuente Inter de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
+<body class="bg-gray-50">
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/img/perfil-user.png" class="user-image" alt="User">
-                        <span class="d-none d-md-inline">Admin Usuario</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                            <a href="login.html" class="btn btn-default btn-flat float-right">Cerrar sesión</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+  <!-- Barra lateral de navegación -->
+  <aside id="sidebar" class="fixed left-0 top-0 h-screen w-64 bg-slate-900 flex flex-col z-50">
 
-        <aside class="main-sidebar sidebar-dark-primary">
-            <a href="admin.html" class="brand-link">
-                <img src="assets/img/gg.png" alt="Logo" class="brand-logo">
-                <span class="brand-text">Gestivoryx</span>
-            </a>
-            <div class="sidebar">
-                <div class="user-panel">
-                    <div class="user-info">
-                        <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
-                        <div class="user-details">
-                            <div class="user-name">Usuario</div>
-                            <div class="user-role">Admin</div>
-                        </div>
-                    </div>
-                </div>
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                        <li class="nav-header">Módulos</li>
-                        <li class="nav-item"><a href="admin.html" class="nav-link"><i class="nav-icon fas fa-tachometer-alt"></i><p>Dashboard</p></a></li>
-                        <li class="nav-item"><a href="lista_productos.html" class="nav-link"><i class="nav-icon fas fa-box"></i><p>Productos</p></a></li>
-                        <li class="nav-item"><a href="categorias.html" class="nav-link"><i class="nav-icon fas fa-th-large"></i><p>Categorías</p></a></li>
-                        <li class="nav-item"><a href="clientes.html" class="nav-link active"><i class="nav-icon fas fa-user-friends"></i><p>Clientes</p></a></li>
-                        <li class="nav-item"><a href="proveedores.html" class="nav-link"><i class="nav-icon fas fa-truck"></i><p>Proveedores</p></a></li>
-                        <li class="nav-item"><a href="ventas.html" class="nav-link"><i class="nav-icon fas fa-shopping-cart"></i><p>Ventas</p></a></li>
-                        <li class="nav-item"><a href="usuarios.html" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Usuarios</p></a></li>
-                        <li class="nav-item"><a href="ajustes.html" class="nav-link"><i class="nav-icon fas fa-cog"></i><p>Ajustes</p></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-
-        <div class="content-wrapper">
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6"><h1 class="m-0">Clientes</h1></div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="admin.html">Inicio</a></li>
-                                <li class="breadcrumb-item active">Clientes</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Lista de Clientes</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-primary btn-sm"
-                                          onclick="document.getElementById('modalAgregarCliente').style.display='block';document.getElementById('modalAgregarCliente').classList.add('show')">
-                                            <i class="fas fa-plus"></i> Nuevo Cliente
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body table-responsive">
-                                    <table id="tablaClientes" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th><th>Nombre</th><th>Documento</th>
-                                                <th>Teléfono</th><th>Email</th><th>Estado</th><th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block"><b>Versión</b> 1.0.0</div>
-            <strong>Copyright &copy; 2025 <a href="#">Gestivoryx</a>.</strong> Todos los derechos reservados.
-        </footer>
+    <!-- Logo y marca -->
+    <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-700/50">
+      <div class="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        </svg>
+      </div>
+      <span class="text-white font-bold text-lg tracking-tight">Gestivoryx</span>
     </div>
 
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/menu.js"></script>
-    <script src="assets/js/clientes.js"></script>
-
-    <!-- Modal Agregar Cliente -->
-    <div class="modal fade" id="modalAgregarCliente" tabindex="-1" style="display:none">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-primary text-white">
-            <h5 class="modal-title"><i class="fas fa-user-plus mr-2"></i>Nuevo Cliente</h5>
-            <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
-          </div>
-          <form id="formAgregarCliente">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6"><div class="form-group"><label>Nombre *</label><input type="text" id="cliNombre" class="form-control" required></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Documento</label><input type="text" id="cliDocumento" class="form-control" placeholder="CC, NIT..."></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Teléfono</label><input type="text" id="cliTelefono" class="form-control"></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Email</label><input type="email" id="cliEmail" class="form-control"></div></div>
-              <div class="col-12"><div class="form-group"><label>Dirección</label><textarea id="cliDireccion" class="form-control" rows="2"></textarea></div></div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-1"></i>Guardar</button>
-          </div>
-          </form>
+    <!-- Panel del usuario autenticado -->
+    <div class="px-4 py-4 border-b border-slate-700/50">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <p class="user-name text-sm font-medium text-white truncate">Admin</p>
+          <p class="user-role text-xs text-slate-400 truncate">Administrador</p>
         </div>
       </div>
     </div>
 
-    <!-- Modal Editar Cliente -->
-    <div class="modal fade" id="modalEditarCliente" tabindex="-1" style="display:none">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-warning">
-            <h5 class="modal-title"><i class="fas fa-edit mr-2"></i>Editar Cliente</h5>
-            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-          </div>
-          <form id="formEditarCliente">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6"><div class="form-group"><label>Nombre *</label><input type="text" id="editCliNombre" class="form-control" required></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Documento</label><input type="text" id="editCliDocumento" class="form-control"></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Teléfono</label><input type="text" id="editCliTelefono" class="form-control"></div></div>
-              <div class="col-md-6"><div class="form-group"><label>Email</label><input type="email" id="editCliEmail" class="form-control"></div></div>
-              <div class="col-12"><div class="form-group"><label>Dirección</label><textarea id="editCliDireccion" class="form-control" rows="2"></textarea></div></div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-warning"><i class="fas fa-save mr-1"></i>Actualizar</button>
-          </div>
-          </form>
-        </div>
-      </div>
+    <!-- Menú de navegación principal -->
+    <nav class="flex-1 px-3 py-4 overflow-y-auto">
+      <ul class="space-y-0.5">
+
+        <!-- Dashboard -->
+        <li>
+          <a href="admin.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <!-- Productos -->
+        <li>
+          <a href="lista_productos.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+            <span>Productos</span>
+          </a>
+        </li>
+
+        <!-- Categorías -->
+        <li>
+          <a href="categorias.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/>
+            </svg>
+            <span>Categorías</span>
+          </a>
+        </li>
+
+        <!-- Proveedores -->
+        <li>
+          <a href="proveedores.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+            </svg>
+            <span>Proveedores</span>
+          </a>
+        </li>
+
+        <!-- Clientes (elemento activo) -->
+        <li>
+          <a href="clientes.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-cyan-400 bg-slate-800 border-l-2 border-cyan-400 text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <span>Clientes</span>
+          </a>
+        </li>
+
+        <!-- Ventas -->
+        <li>
+          <a href="ventas.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span>Ventas</span>
+          </a>
+        </li>
+
+        <!-- Movimientos -->
+        <li>
+          <a href="movimientos.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+            </svg>
+            <span>Movimientos</span>
+          </a>
+        </li>
+
+        <!-- Usuarios -->
+        <li>
+          <a href="usuarios.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span>Usuarios</span>
+          </a>
+        </li>
+
+        <!-- Ajustes -->
+        <li>
+          <a href="ajustes.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>Ajustes</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Botón de cierre de sesión -->
+    <div class="px-3 py-4 border-t border-slate-700/50">
+      <a href="login.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        <span>Cerrar Sesión</span>
+      </a>
     </div>
+
+  </aside>
+  <!-- Fin barra lateral -->
+
+  <!-- Contenido principal desplazado por el sidebar -->
+  <div id="main-content" class="ml-64 flex flex-col min-h-screen">
+
+    <!-- Cabecera superior -->
+    <header class="bg-white border-b border-gray-100 px-8 py-4 flex items-center justify-between sticky top-0 z-40">
+      <div>
+        <h1 class="text-xl font-semibold text-gray-800">Clientes</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Gestión de clientes del sistema</p>
+      </div>
+      <!-- Información del usuario en cabecera -->
+      <div class="flex items-center gap-3">
+        <div class="text-right">
+          <p class="text-sm font-medium text-gray-800 user-name">Admin</p>
+          <p class="text-xs text-gray-500 user-role">Administrador</p>
+        </div>
+        <div class="w-9 h-9 bg-cyan-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">A</div>
+      </div>
+    </header>
+
+    <!-- Área de contenido de la página -->
+    <main class="flex-1 px-8 py-6 space-y-6">
+
+      <!-- Tarjetas de estadísticas -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        <!-- Tarjeta: Clientes Activos -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4">
+          <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800">120</p>
+            <p class="text-sm text-gray-500">Clientes Activos</p>
+          </div>
+        </div>
+
+        <!-- Tarjeta: Total de Clientes -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800">135</p>
+            <p class="text-sm text-gray-500">Total Clientes</p>
+          </div>
+        </div>
+
+        <!-- Tarjeta: Nuevos este mes -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-4">
+          <div class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-gray-800">8</p>
+            <p class="text-sm text-gray-500">Nuevos este mes</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- Fin tarjetas de estadísticas -->
+
+      <!-- Tarjeta contenedora de la tabla de clientes -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+
+        <!-- Encabezado de la tabla -->
+        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+          <h2 class="text-base font-semibold text-gray-800">Lista de Clientes</h2>
+          <button onclick="document.getElementById('modalAgregarCliente').style.display='flex'"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+            Nuevo Cliente
+          </button>
+        </div>
+
+        <!-- Contenedor con scroll horizontal para la tabla -->
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="bg-gray-50/70">
+              <tr>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documento</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+              </tr>
+            </thead>
+            <!-- Cuerpo de la tabla; JS puede reemplazar estas filas con datos reales -->
+            <tbody id="tablaClientes" class="divide-y divide-gray-50">
+
+              <!-- Fila 1: Juan García Pérez -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#1</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Juan García Pérez</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 12345678</td>
+                <td class="px-4 py-3 text-sm text-gray-600">311-555-1001</td>
+                <td class="px-4 py-3 text-sm text-gray-600">juan.garcia@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <!-- Botón editar cliente -->
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <!-- Botón eliminar cliente -->
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 2: María López Díaz -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#2</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">María López Díaz</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 23456789</td>
+                <td class="px-4 py-3 text-sm text-gray-600">312-555-1002</td>
+                <td class="px-4 py-3 text-sm text-gray-600">m.lopez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 3: Carlos Rodríguez Ruiz -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#3</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Carlos Rodríguez Ruiz</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 34567890</td>
+                <td class="px-4 py-3 text-sm text-gray-600">313-555-1003</td>
+                <td class="px-4 py-3 text-sm text-gray-600">c.rodriguez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 4: Ana Martínez Silva -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#4</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Ana Martínez Silva</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 45678901</td>
+                <td class="px-4 py-3 text-sm text-gray-600">314-555-1004</td>
+                <td class="px-4 py-3 text-sm text-gray-600">a.martinez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 5: Pedro Sánchez Mora (Inactivo) -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#5</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Pedro Sánchez Mora</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 56789012</td>
+                <td class="px-4 py-3 text-sm text-gray-600">315-555-1005</td>
+                <td class="px-4 py-3 text-sm text-gray-600">p.sanchez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Inactivo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 6: Lucía Fernández Castro -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#6</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Lucía Fernández Castro</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 67890123</td>
+                <td class="px-4 py-3 text-sm text-gray-600">316-555-1006</td>
+                <td class="px-4 py-3 text-sm text-gray-600">l.fernandez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 7: Andrés Torres Vega -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#7</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Andrés Torres Vega</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 78901234</td>
+                <td class="px-4 py-3 text-sm text-gray-600">317-555-1007</td>
+                <td class="px-4 py-3 text-sm text-gray-600">a.torres@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Fila 8: Sofía Ramírez Pineda -->
+              <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-4 py-3 text-sm text-gray-500">#8</td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-800">Sofía Ramírez Pineda</td>
+                <td class="px-4 py-3 text-sm text-gray-600">CC 89012345</td>
+                <td class="px-4 py-3 text-sm text-gray-600">318-555-1008</td>
+                <td class="px-4 py-3 text-sm text-gray-600">s.ramirez@email.com</td>
+                <td class="px-4 py-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>
+                </td>
+                <td class="px-4 py-3">
+                  <div class="flex items-center gap-1">
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-cyan-600 hover:bg-cyan-50 transition-colors" title="Editar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                      </svg>
+                    </button>
+                    <button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Eliminar cliente">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- Fin tabla de clientes -->
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-white border-t border-gray-100 px-8 py-4">
+      <p class="text-sm text-gray-500 text-center">
+        &copy; 2025 <span class="font-medium text-gray-700">Gestivoryx</span>. Todos los derechos reservados.
+      </p>
+    </footer>
+
+  </div>
+  <!-- Fin contenido principal -->
+
+  <!-- Modal: Agregar Cliente -->
+  <div id="modalAgregarCliente" class="fixed inset-0 z-50 bg-black/50 items-center justify-center p-4" style="display:none">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg">
+
+      <!-- Encabezado del modal -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h3 class="text-base font-semibold text-gray-800">Nuevo Cliente</h3>
+        <button onclick="document.getElementById('modalAgregarCliente').style.display='none'"
+          class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Formulario de registro de cliente -->
+      <form id="formAgregarCliente" class="px-6 py-5 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Nombre completo -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre <span class="text-red-500">*</span></label>
+            <input type="text" id="cliNombre" placeholder="Nombre completo del cliente"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" required>
+          </div>
+
+          <!-- Número de documento -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+            <input type="text" id="cliDocumento" placeholder="CC, NIT, etc."
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Teléfono -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+            <input type="text" id="cliTelefono" placeholder="300-000-0000"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Correo electrónico -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="cliEmail" placeholder="correo@ejemplo.com"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Dirección física -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+            <textarea id="cliDireccion" rows="2" placeholder="Dirección del cliente"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Botones de acción del modal -->
+        <div class="flex items-center justify-end gap-3 pt-2 border-t border-gray-100">
+          <button type="button" onclick="document.getElementById('modalAgregarCliente').style.display='none'"
+            class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+            Cancelar
+          </button>
+          <button type="submit"
+            class="px-4 py-2 text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 rounded-xl transition-colors">
+            Guardar Cliente
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <!-- Fin modal Agregar Cliente -->
+
+  <!-- Modal: Editar Cliente -->
+  <div id="modalEditarCliente" class="fixed inset-0 z-50 bg-black/50 items-center justify-center p-4" style="display:none">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg">
+
+      <!-- Encabezado del modal de edición -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h3 class="text-base font-semibold text-gray-800">Editar Cliente</h3>
+        <button onclick="document.getElementById('modalEditarCliente').style.display='none'"
+          class="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Formulario de actualización de cliente -->
+      <form id="formEditarCliente" class="px-6 py-5 space-y-4">
+
+        <!-- Campo oculto para identificar el cliente a editar -->
+        <input type="hidden" id="editCliId">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Nombre completo -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre <span class="text-red-500">*</span></label>
+            <input type="text" id="editCliNombre" placeholder="Nombre completo del cliente"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" required>
+          </div>
+
+          <!-- Número de documento -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Documento</label>
+            <input type="text" id="editCliDocumento" placeholder="CC, NIT, etc."
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Teléfono -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+            <input type="text" id="editCliTelefono" placeholder="300-000-0000"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Correo electrónico -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="editCliEmail" placeholder="correo@ejemplo.com"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+          </div>
+
+          <!-- Dirección física -->
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+            <textarea id="editCliDireccion" rows="2" placeholder="Dirección del cliente"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Botones de acción del modal -->
+        <div class="flex items-center justify-end gap-3 pt-2 border-t border-gray-100">
+          <button type="button" onclick="document.getElementById('modalEditarCliente').style.display='none'"
+            class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+            Cancelar
+          </button>
+          <button type="submit"
+            class="px-4 py-2 text-sm font-medium text-white bg-cyan-500 hover:bg-cyan-600 rounded-xl transition-colors">
+            Actualizar Cliente
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <!-- Fin modal Editar Cliente -->
+
+  <!-- Scripts de la aplicación -->
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/menu.js"></script>
+  <script src="assets/js/clientes.js"></script>
+  <script>
+    // Verificar autenticación al cargar la página
+    requireAuth();
+  </script>
+
 </body>
-
 </html>

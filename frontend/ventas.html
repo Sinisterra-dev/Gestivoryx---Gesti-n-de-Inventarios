@@ -1,307 +1,600 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Gestivoryx | Ventas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Estilos generales -->
-    <link rel="stylesheet" href="assets/css/estilos.css">
-    <link rel="stylesheet" href="assets/css/dashboard.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestivoryx | Ventas</title>
+  <!-- Fuente Inter de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
 </head>
+<body class="bg-gray-50 text-gray-800">
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <!-- Barra superior -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Botón para colapsar el menú lateral -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                </li>
-            </ul>
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="fixed top-0 left-0 h-full w-64 bg-slate-900 flex flex-col z-30">
 
-            <ul class="navbar-nav ml-auto">
-                <!-- Notificaciones -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header">3 Notificaciones</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 nuevos mensajes
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 solicitudes
-                            <span class="float-right text-muted text-sm">12 horas</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 reportes nuevos
-                            <span class="float-right text-muted text-sm">2 días</span>
-                        </a>
-                    </div>
-                </li>
-
-                <!-- Usuario -->
-                <li class="nav-item dropdown user-menu">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/img/perfil-user.png" class="user-image" alt="User Image">
-                        <span class="d-none d-md-inline">Admin Usuario</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <li class="user-header bg-primary">
-                            <img src="assets/img/perfil-user.png" class="img-circle" alt="User Image">
-                            <p>
-                                Admin Usuario
-                                <small>Administrador</small>
-                            </p>
-                        </li>
-                        <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
-                            <a href="login.html" class="btn btn-default btn-flat float-right">Cerrar sesión</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Sidebar -->
-        <aside class="main-sidebar sidebar-dark-primary">
-            <!-- Logo -->
-            <a href="admin.html" class="brand-link">
-                <img src="assets/img/gg.png" alt="Logo" class="brand-logo">
-                <span class="brand-text">Gestivoryx</span>
-            </a>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Panel de usuario -->
-                <div class="user-panel">
-                    <div class="user-info">
-                        <div class="user-avatar">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                        <div class="user-details">
-                            <div class="user-name">Usuario</div>
-                            <div class="user-role">Admin</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Menú lateral -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-header">Módulos</li>
-                        <li class="nav-item">
-                            <a href="admin.html" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="lista_productos.html" class="nav-link">
-                                <i class="nav-icon fas fa-box"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="categorias.html" class="nav-link">
-                                <i class="nav-icon fas fa-th-large"></i>
-                                <p>Categorías</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="usuarios.html" class="nav-link">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Usuarios</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="proveedores.html" class="nav-link">
-                                <i class="nav-icon fas fa-truck"></i>
-                                <p>Proveedores</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="clientes.html" class="nav-link">
-                                <i class="nav-icon fas fa-user-friends"></i>
-                                <p>Clientes</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ventas.html" class="nav-link active">
-                                <i class="nav-icon fas fa-shopping-cart"></i>
-                                <p>Ventas</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ajustes.html" class="nav-link">
-                                <i class="nav-icon fas fa-cog"></i>
-                                <p>Ajustes</p>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
-
-        <!-- Content Wrapper -->
-        <div class="content-wrapper">
-            <!-- Encabezado de página -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Ventas</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="admin.html">Inicio</a></li>
-                                <li class="breadcrumb-item active">Ventas</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido principal -->
-            <section class="content">
-                <div class="container-fluid">
-                    <!-- Tabla de ventas -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Historial de Ventas</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-success btn-sm"
-                                          onclick="document.getElementById('modalNuevaVenta').style.display='block';document.getElementById('modalNuevaVenta').classList.add('show')">
-                                            <i class="fas fa-plus"></i> Nueva Venta
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="card-body table-responsive">
-                                    <table id="tablaVentas" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Número</th>
-                                                <th>Cliente</th>
-                                                <th>Productos</th>
-                                                <th>Total</th>
-                                                <th>Estado</th>
-                                                <th>Fecha</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Footer -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block"><b>Versión</b> 1.0.0</div>
-            <strong>Copyright &copy; 2025 <a href="#">Gestivoryx</a>.</strong> Todos los derechos reservados.
-        </footer>
+    <!-- Logo -->
+    <div class="px-6 py-5 border-b border-slate-800">
+      <span class="text-white text-xl font-bold tracking-tight">Gestivoryx</span>
+      <p class="text-slate-400 text-xs mt-0.5">Gestión de Inventarios</p>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/menu.js"></script>
-    <script src="assets/js/ventas.js"></script>
+    <!-- Navegación principal -->
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
 
-    <!-- Modal Nueva Venta -->
-    <div class="modal fade" id="modalNuevaVenta" tabindex="-1" style="display:none">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header bg-success text-white">
-            <h5 class="modal-title"><i class="fas fa-shopping-cart mr-2"></i>Nueva Venta</h5>
-            <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
-          </div>
-          <form id="formNuevaVenta">
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Cliente (opcional)</label>
-                  <select id="ventaCliente" class="form-control"></select>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Descuento ($)</label>
-                  <input type="number" id="ventaDescuento" class="form-control" min="0" value="0" step="0.01">
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>Notas</label>
-                  <input type="text" id="ventaNotas" class="form-control" placeholder="Observaciones...">
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="row align-items-end mb-3">
-              <div class="col-md-9">
-                <label>Agregar Producto</label>
-                <select id="ventaProducto" class="form-control"></select>
-              </div>
-              <div class="col-md-3">
-                <button type="button" id="btnAgregarCarrito" class="btn btn-primary btn-block">
-                  <i class="fas fa-plus"></i> Agregar
-                </button>
-              </div>
-            </div>
-            <table class="table table-sm table-bordered" id="tablaCarrito">
-              <thead class="thead-light">
-                <tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th><th></th></tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-            <div class="text-right">
-              <h4>Total: <span id="ventaTotal" class="text-success">$0</span></h4>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success"><i class="fas fa-check mr-1"></i>Confirmar Venta</button>
-          </div>
-          </form>
+      <!-- Dashboard -->
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <!-- Productos -->
+      <a href="lista_productos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        </svg>
+        Productos
+      </a>
+
+      <!-- Categorías -->
+      <a href="categorias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        Categorías
+      </a>
+
+      <!-- Proveedores -->
+      <a href="proveedores.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+        </svg>
+        Proveedores
+      </a>
+
+      <!-- Clientes -->
+      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Clientes
+      </a>
+
+      <!-- Ventas (activo) -->
+      <a href="ventas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-cyan-400 bg-slate-800 border-l-2 border-cyan-400 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        Ventas
+      </a>
+
+      <!-- Movimientos -->
+      <a href="movimientos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+        </svg>
+        Movimientos
+      </a>
+
+      <!-- Usuarios -->
+      <a href="usuarios.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        Usuarios
+      </a>
+
+      <!-- Ajustes -->
+      <a href="ajustes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Ajustes
+      </a>
+    </nav>
+
+    <!-- Perfil de usuario -->
+    <div class="px-4 py-4 border-t border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white text-sm font-semibold">A</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-medium text-white truncate user-name">Admin</p>
+          <p class="text-xs text-slate-400 truncate user-role">Administrador</p>
         </div>
       </div>
     </div>
+  </aside>
+  <!-- ===== FIN SIDEBAR ===== -->
 
-    <!-- Modal Ver Venta -->
-    <div class="modal fade" id="modalVerVenta" tabindex="-1" style="display:none">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header bg-info text-white">
-            <h5 class="modal-title"><i class="fas fa-eye mr-2"></i>Detalle de Venta</h5>
-            <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
-          </div>
-          <div class="modal-body" id="ventaDetalle"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="ml-64 min-h-screen p-8">
+
+    <!-- Encabezado de página -->
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Ventas</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Registro y seguimiento de ventas</p>
+      </div>
+      <!-- Botón para abrir el modal de nueva venta -->
+      <button onclick="document.getElementById('modalNuevaVenta').classList.remove('hidden')"
+        class="flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        Nueva Venta
+      </button>
+    </div>
+
+    <!-- ===== FILA DE TARJETAS DE ESTADÍSTICAS ===== -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+
+      <!-- Ventas Hoy -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-500">Ventas Hoy</span>
+          <div class="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
           </div>
         </div>
+        <p class="text-3xl font-bold text-gray-900">12</p>
+        <p class="text-xs text-gray-400 mt-1">Transacciones registradas</p>
+      </div>
+
+      <!-- Total Mes -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-500">Total Mes</span>
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-gray-900">$2.8M</p>
+        <p class="text-xs text-gray-400 mt-1">Ingresos acumulados</p>
+      </div>
+
+      <!-- Clientes Atendidos -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-500">Clientes Atendidos</span>
+          <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-gray-900">9</p>
+        <p class="text-xs text-gray-400 mt-1">Clientes únicos hoy</p>
+      </div>
+
+      <!-- Ticket Promedio -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium text-gray-500">Ticket Promedio</span>
+          <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-gray-900">$233K</p>
+        <p class="text-xs text-gray-400 mt-1">Por transacción</p>
       </div>
     </div>
+    <!-- ===== FIN TARJETAS ===== -->
+
+    <!-- ===== TABLA DE VENTAS ===== -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-100">
+        <h2 class="text-base font-semibold text-gray-900">Historial de Ventas</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead class="bg-gray-50 border-b border-gray-100">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Cliente</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Total</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Estado</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Fecha</th>
+              <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <!-- Cuerpo de la tabla poblado desde ventas.js -->
+          <tbody id="tablaVentas" class="divide-y divide-gray-50">
+            <!-- Venta #1041 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1041</td>
+              <td class="px-6 py-4 text-gray-700">Ana Martínez</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$580,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">15 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1041, 'Ana Martínez', '$580,000', 'Completada', '15 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Venta #1042 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1042</td>
+              <td class="px-6 py-4 text-gray-700">Carlos López</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$1,250,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">15 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1042, 'Carlos López', '$1,250,000', 'Completada', '15 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Venta #1043 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1043</td>
+              <td class="px-6 py-4 text-gray-700">Juan García</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$320,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Pendiente</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">15 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1043, 'Juan García', '$320,000', 'Pendiente', '15 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Venta #1044 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1044</td>
+              <td class="px-6 py-4 text-gray-700">María Torres</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$890,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">14 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1044, 'María Torres', '$890,000', 'Completada', '14 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Venta #1045 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1045</td>
+              <td class="px-6 py-4 text-gray-700">Pedro Sánchez</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$450,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Anulada</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">14 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1045, 'Pedro Sánchez', '$450,000', 'Anulada', '14 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <!-- Venta #1046 -->
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 font-medium text-gray-900">#1046</td>
+              <td class="px-6 py-4 text-gray-700">Lucía Fernández</td>
+              <td class="px-6 py-4 font-semibold text-gray-900">$1,100,000</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span>
+              </td>
+              <td class="px-6 py-4 text-gray-500">13 ene 2024</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <button title="Editar" class="p-1.5 text-gray-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="verDetalle(1046, 'Lucía Fernández', '$1,100,000', 'Completada', '13 ene 2024')" title="Ver detalle" class="p-1.5 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- ===== FIN TABLA ===== -->
+  </main>
+  <!-- ===== FIN CONTENIDO PRINCIPAL ===== -->
+
+  <!-- ===== MODAL: NUEVA VENTA ===== -->
+  <div id="modalNuevaVenta" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+
+      <!-- Cabecera del modal -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h3 class="text-lg font-semibold text-gray-900">Nueva Venta</h3>
+        <button onclick="document.getElementById('modalNuevaVenta').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Cuerpo del modal -->
+      <div class="overflow-y-auto flex-1 px-6 py-5">
+        <form id="formNuevaVenta" class="space-y-5">
+
+          <!-- Selector de cliente -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Cliente</label>
+            <select id="ventaCliente" class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+              <option value="">Seleccionar cliente...</option>
+              <option value="ana">Ana Martínez</option>
+              <option value="carlos">Carlos López</option>
+              <option value="juan">Juan García</option>
+              <option value="maria">María Torres</option>
+              <option value="pedro">Pedro Sánchez</option>
+            </select>
+          </div>
+
+          <!-- Fila: selector de producto + botón agregar -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Agregar Producto</label>
+            <div class="flex gap-2">
+              <select id="selectProductoVenta" class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                <option value="">Seleccionar producto...</option>
+                <option value="laptop" data-precio="3200000">Laptop HP ProBook ($3,200,000)</option>
+                <option value="mouse" data-precio="320000">Mouse Logitech MX ($320,000)</option>
+                <option value="teclado" data-precio="185000">Teclado Mecánico ($185,000)</option>
+                <option value="monitor" data-precio="1450000">Monitor Samsung 27" ($1,450,000)</option>
+              </select>
+              <button type="button" onclick="agregarAlCarrito()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors whitespace-nowrap">
+                Agregar
+              </button>
+            </div>
+          </div>
+
+          <!-- Carrito de productos -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5">Carrito</label>
+            <div class="border border-gray-200 rounded-xl overflow-hidden">
+              <table class="w-full text-sm">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500">Producto</th>
+                    <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500">Precio</th>
+                    <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500">Cant</th>
+                    <th class="px-4 py-2.5 text-left text-xs font-semibold text-gray-500">Subtotal</th>
+                    <th class="px-4 py-2.5"></th>
+                  </tr>
+                </thead>
+                <!-- Filas del carrito gestionadas por ventas.js -->
+                <tbody id="carritoBody">
+                  <tr id="carritoVacio">
+                    <td colspan="5" class="px-4 py-6 text-center text-gray-400 text-xs">Sin productos agregados</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Descuento -->
+          <div>
+            <label for="ventaDescuento" class="block text-sm font-medium text-gray-700 mb-1.5">Descuento (%)</label>
+            <input type="number" id="ventaDescuento" min="0" max="100" placeholder="0"
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              oninput="calcularTotal()" />
+          </div>
+
+          <!-- Notas -->
+          <div>
+            <label for="ventaNotas" class="block text-sm font-medium text-gray-700 mb-1.5">Notas</label>
+            <textarea id="ventaNotas" rows="2" placeholder="Observaciones opcionales..."
+              class="w-full px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"></textarea>
+          </div>
+
+          <!-- Total calculado -->
+          <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+            <span class="text-sm font-semibold text-gray-700">Total de la venta</span>
+            <span id="totalVenta" class="text-lg font-bold text-cyan-600">$0</span>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="flex justify-end gap-3 px-6 py-4 border-t border-gray-100">
+        <button type="button" onclick="document.getElementById('modalNuevaVenta').classList.add('hidden')"
+          class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-colors">
+          Cancelar
+        </button>
+        <button type="submit" form="formNuevaVenta"
+          class="px-5 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors">
+          Registrar Venta
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ===== FIN MODAL NUEVA VENTA ===== -->
+
+  <!-- ===== MODAL: VER DETALLE DE VENTA ===== -->
+  <div id="modalVerVenta" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg">
+
+      <!-- Cabecera -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h3 class="text-lg font-semibold text-gray-900">Detalle de Venta</h3>
+        <button onclick="document.getElementById('modalVerVenta').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Contenido de solo lectura -->
+      <div class="px-6 py-5 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">N° de Venta</p>
+            <p id="detalleNumero" class="text-sm font-semibold text-gray-900">—</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Fecha</p>
+            <p id="detalleFecha" class="text-sm text-gray-700">—</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Cliente</p>
+            <p id="detalleCliente" class="text-sm text-gray-700">—</p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 mb-0.5">Estado</p>
+            <p id="detalleEstado" class="text-sm text-gray-700">—</p>
+          </div>
+        </div>
+        <div class="border-t border-gray-100 pt-4">
+          <p class="text-xs text-gray-400 mb-1">Artículos</p>
+          <p id="detalleItems" class="text-sm text-gray-600">—</p>
+        </div>
+        <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
+          <span class="text-sm font-semibold text-gray-700">Total</span>
+          <span id="detalleTotal" class="text-lg font-bold text-cyan-600">—</span>
+        </div>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="flex justify-end px-6 py-4 border-t border-gray-100">
+        <button onclick="document.getElementById('modalVerVenta').classList.add('hidden')"
+          class="px-5 py-2 bg-gray-100 hover:bg-gray-200 text-sm font-medium text-gray-700 rounded-xl transition-colors">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ===== FIN MODAL VER VENTA ===== -->
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/ventas.js"></script>
+  <script>
+    // Verificar autenticación al cargar
+    requireAuth();
+
+    // Carrito de productos en memoria
+    let carrito = [];
+
+    // Agregar producto seleccionado al carrito
+    function agregarAlCarrito() {
+      const select = document.getElementById('selectProductoVenta');
+      const opcion = select.options[select.selectedIndex];
+      if (!opcion.value) return;
+
+      const nombre = opcion.text.split(' (')[0];
+      const precio = parseInt(opcion.dataset.precio);
+      const existente = carrito.find(p => p.id === opcion.value);
+
+      if (existente) {
+        existente.cantidad++;
+      } else {
+        carrito.push({ id: opcion.value, nombre, precio, cantidad: 1 });
+      }
+      renderCarrito();
+    }
+
+    // Eliminar producto del carrito
+    function eliminarDelCarrito(id) {
+      carrito = carrito.filter(p => p.id !== id);
+      renderCarrito();
+    }
+
+    // Renderizar filas del carrito y recalcular total
+    function renderCarrito() {
+      const tbody = document.getElementById('carritoBody');
+      if (carrito.length === 0) {
+        tbody.innerHTML = '<tr id="carritoVacio"><td colspan="5" class="px-4 py-6 text-center text-gray-400 text-xs">Sin productos agregados</td></tr>';
+        calcularTotal();
+        return;
+      }
+      tbody.innerHTML = carrito.map(p => `
+        <tr class="border-t border-gray-100">
+          <td class="px-4 py-2.5 text-gray-700">${p.nombre}</td>
+          <td class="px-4 py-2.5 text-gray-600">$${p.precio.toLocaleString('es-CO')}</td>
+          <td class="px-4 py-2.5">
+            <input type="number" min="1" value="${p.cantidad}"
+              class="w-16 px-2 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              onchange="actualizarCantidad('${p.id}', this.value)" />
+          </td>
+          <td class="px-4 py-2.5 font-medium text-gray-900">$${(p.precio * p.cantidad).toLocaleString('es-CO')}</td>
+          <td class="px-4 py-2.5">
+            <button type="button" onclick="eliminarDelCarrito('${p.id}')" class="text-red-400 hover:text-red-600 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+      calcularTotal();
+    }
+
+    // Actualizar cantidad de un producto en el carrito
+    function actualizarCantidad(id, valor) {
+      const item = carrito.find(p => p.id === id);
+      if (item) { item.cantidad = Math.max(1, parseInt(valor) || 1); }
+      calcularTotal();
+    }
+
+    // Calcular y mostrar el total aplicando descuento
+    function calcularTotal() {
+      const descuento = parseFloat(document.getElementById('ventaDescuento').value) || 0;
+      const subtotal = carrito.reduce((s, p) => s + p.precio * p.cantidad, 0);
+      const total = subtotal * (1 - descuento / 100);
+      document.getElementById('totalVenta').textContent = '$' + Math.round(total).toLocaleString('es-CO');
+    }
+
+    // Abrir modal de ver detalle con los datos de la fila
+    function verDetalle(numero, cliente, total, estado, fecha) {
+      document.getElementById('detalleNumero').textContent = '#' + numero;
+      document.getElementById('detalleCliente').textContent = cliente;
+      document.getElementById('detalleTotal').textContent = total;
+      document.getElementById('detalleEstado').textContent = estado;
+      document.getElementById('detalleFecha').textContent = fecha;
+      document.getElementById('detalleItems').textContent = 'Artículos no disponibles en vista previa.';
+      document.getElementById('modalVerVenta').classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
