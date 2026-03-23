@@ -1,0 +1,23 @@
+# robots.txt — Gestivoryx | Sistema de Gestión de Inventarios
+# Desarrollado por Alexander Sinisterra (sinisterradev)
+# Sitio oficial: https://www.sinisterradev.com
+
+User-agent: *
+
+# Permitir indexación de la página de inicio de sesión (pública)
+Allow: /login.html
+Allow: /assets/
+
+# Bloquear páginas privadas del panel de administración
+Disallow: /admin.html
+Disallow: /lista_productos.html
+Disallow: /categorias.html
+Disallow: /clientes.html
+Disallow: /proveedores.html
+Disallow: /ventas.html
+Disallow: /movimientos.html
+Disallow: /usuarios.html
+Disallow: /ajustes.html
+
+# Mapa del sitio
+Sitemap: https://www.sinisterradev.com/gestivoryx/sitemap.xml

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- sitemap.xml — Gestivoryx | Sistema de Gestión de Inventarios -->
+<!-- Desarrollado por Alexander Sinisterra (sinisterradev) — https://www.sinisterradev.com -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Página pública: Inicio de Sesión -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/login.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.sinisterradev.com/gestivoryx/login.html"/>
+  </url>
+
+  <!-- Panel privado: Dashboard -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/admin.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Panel privado: Productos -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/lista_productos.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Panel privado: Categorías -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/categorias.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Panel privado: Clientes -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/clientes.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Panel privado: Proveedores -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/proveedores.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Panel privado: Ventas -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/ventas.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Panel privado: Movimientos de Inventario -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/movimientos.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Panel privado: Usuarios -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/usuarios.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Panel privado: Ajustes -->
+  <url>
+    <loc>https://www.sinisterradev.com/gestivoryx/ajustes.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
