@@ -204,7 +204,7 @@
       const password = document.getElementById('password').value;
 
       try {
-        const data = await api.post('/auth/login', { username, password });
+        const data = await api.post('/api/auth/login', { username, password });
 
         if (data && data.access_token) {
           setToken(data.access_token);
