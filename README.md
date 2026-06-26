@@ -37,7 +37,7 @@ Incluye una API REST completa con autenticación JWT, control de roles y un fron
 - **SQLAlchemy 2.x** – ORM
 - **SQLite** – base de datos (sin dependencias externas)
 - **Pydantic v2** – validación de datos
-- **python-jose** – generación y verificación de JWT
+- **python-** – generación y verificación de JWT
 - **passlib + bcrypt** – hashing de contraseñas
 - **Uvicorn** – servidor ASGI
 
