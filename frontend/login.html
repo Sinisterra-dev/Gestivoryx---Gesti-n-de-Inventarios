@@ -6,13 +6,11 @@
   <title>Gestivoryx — Iniciar Sesión | Sistema de Gestión de Inventarios</title>
 
   <!-- ═══════════════════════ SEO ═══════════════════════ -->
-  <!-- Primary Meta Tags -->
   <meta name="description" content="Gestivoryx — Sistema de gestión de inventarios para PYMEs. Administra productos, ventas, clientes y proveedores desde un panel centralizado. Creado por Alexander Sinisterra (sinisterradev)." />
   <meta name="keywords" content="gestión de inventarios, inventario PYMEs, sistema ERP, control de stock, software inventario, Gestivoryx, sinisterradev, Alexander Sinisterra" />
   <meta name="author" content="Alexander Sinisterra — sinisterradev | www.sinisterradev.com" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.sinisterradev.com/gestivoryx/login.html" />
-  <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Gestivoryx" />
   <meta property="og:url" content="https://www.sinisterradev.com/gestivoryx/login.html" />
@@ -20,40 +18,14 @@
   <meta property="og:description" content="Controla tu inventario, ventas, clientes y proveedores en una sola plataforma. Sistema ERP ligero para PYMEs desarrollado por Alexander Sinisterra." />
   <meta property="og:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png" />
   <meta property="og:locale" content="es_ES" />
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@sinisterradev" />
   <meta name="twitter:creator" content="@sinisterradev" />
   <meta name="twitter:title" content="Gestivoryx — Sistema de Gestión de Inventarios" />
   <meta name="twitter:description" content="Controla tu inventario, ventas, clientes y proveedores en una sola plataforma. Sistema ERP ligero para PYMEs." />
   <meta name="twitter:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png" />
-  <!-- Theme & App Meta -->
   <meta name="theme-color" content="#0f172a" />
   <meta name="application-name" content="Gestivoryx" />
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Gestivoryx",
-    "description": "Sistema de gestión de inventarios para PYMEs. Administra productos, ventas, clientes y proveedores desde un panel centralizado.",
-    "url": "https://www.sinisterradev.com/gestivoryx/",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "inLanguage": "es",
-    "author": {
-      "@type": "Person",
-      "name": "Alexander Sinisterra",
-      "alternateName": "sinisterradev",
-      "url": "https://www.sinisterradev.com"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
   <!-- ═══════════════════════════════════════════════════ -->
 
   <!-- Tailwind CSS via CDN -->
@@ -103,7 +75,7 @@
         <h2 class="text-xl font-semibold text-gray-900 mb-1">Bienvenido de nuevo</h2>
         <p class="text-sm text-gray-500 mb-6">Ingresa tus credenciales para continuar</p>
 
-        <!-- Formulario — mantiene los IDs y lógica existente -->
+        <!-- Formulario -->
         <form id="loginForm" class="space-y-5">
           <!-- Campo de usuario -->
           <div>
@@ -182,7 +154,7 @@
   <script src="assets/js/api.js"></script>
   <script>
     // Redirigir si ya está autenticado
-    if (getToken()) {
+    if (typeof getToken === 'function' && getToken()) {
       window.location.href = 'admin.html';
     }
 
@@ -197,25 +169,44 @@
       // Estado de carga
       btn.disabled = true;
       btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> Iniciando...`;
-
       errorDiv.classList.add('hidden');
 
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
 
       try {
-        const data = await api.post('/api/auth/login', { username, password });
+        // Formateamos los datos como un formulario, no como JSON
+        const formData = new URLSearchParams();
+        formData.append('username', username);
+        formData.append('password', password);
 
-        if (data && data.access_token) {
-          setToken(data.access_token);
-          setUser(data.user || { username, nombre: username, rol: 'usuario' });
+        // Hacemos la petición directa usando fetch para el login
+        // API_BASE viene de assets/js/api.js
+        const baseURL = typeof API_BASE !== 'undefined' ? API_BASE : 'http://127.0.0.1:8000';
+        
+        const response = await fetch(`${baseURL}/api/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.access_token) {
+          // ¡Éxito! Guardamos el token y el usuario
+          if (typeof setToken === 'function') setToken(data.access_token);
+          if (typeof setUser === 'function') setUser({ username: username, rol: 'admin' }); 
+          
           window.location.href = 'admin.html';
         } else {
-          throw new Error('Respuesta inesperada del servidor');
+          // Si el backend rechaza las credenciales (401 u otro error)
+          throw new Error(data.detail || 'Usuario o contraseña incorrectos');
         }
       } catch (err) {
         errorDiv.classList.remove('hidden');
-        errorMsg.textContent = err.message || 'Usuario o contraseña incorrectos';
+        errorMsg.textContent = err.message || 'Error al conectar con el servidor';
         btn.disabled = false;
         btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg> Iniciar Sesión`;
       }

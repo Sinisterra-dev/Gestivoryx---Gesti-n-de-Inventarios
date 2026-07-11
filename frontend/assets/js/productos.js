@@ -2,6 +2,14 @@
  * Gestivoryx – Módulo de Productos
  * CRUD completo conectado al backend API.
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
@@ -111,16 +119,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     formAdd.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = {
-        codigo: document.getElementById("productCode").value.trim(),
-        nombre: document.getElementById("productName").value.trim(),
-        descripcion: document.getElementById("productDesc")?.value.trim() || null,
-        precio_compra: parseFloat(document.getElementById("productPriceCompra")?.value || 0),
-        precio_venta: parseFloat(document.getElementById("productPrice").value),
-        stock: parseInt(document.getElementById("productStock").value),
-        stock_minimo: parseInt(document.getElementById("productStockMin")?.value || 5),
-        unidad: document.getElementById("productUnidad")?.value.trim() || null,
-        categoria_id: document.getElementById("productCategory")?.value || null,
-        proveedor_id: document.getElementById("productProveedor")?.value || null,
+        codigo: safeGetValue("productCode")?.trim() || "",
+        nombre: safeGetValue("productName")?.trim() || "",
+        descripcion: safeGetValue("productDesc")?.trim() || null,
+        precio_compra: parseFloat(safeGetValue("productPriceCompra") || 0),
+        precio_venta: parseFloat(safeGetValue("productPrice") || 0),
+        stock: parseInt(safeGetValue("productStock") || 0),
+        stock_minimo: parseInt(safeGetValue("productStockMin") || 5),
+        unidad: safeGetValue("productUnidad")?.trim() || null,
+        categoria_id: safeGetValue("productCategory") || null,
+        proveedor_id: safeGetValue("productProveedor") || null,
       };
       try {
         await api.post("/api/productos/", data);
@@ -139,15 +147,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     formEdit.addEventListener("submit", async (e) => {
       e.preventDefault();
       const data = {
-        nombre: document.getElementById("editProductName").value.trim(),
-        descripcion: document.getElementById("editProductDesc")?.value.trim() || null,
-        precio_compra: parseFloat(document.getElementById("editProductPriceCompra")?.value || 0),
-        precio_venta: parseFloat(document.getElementById("editProductPrice").value),
-        stock: parseInt(document.getElementById("editProductStock").value),
-        stock_minimo: parseInt(document.getElementById("editProductStockMin")?.value || 5),
-        unidad: document.getElementById("editProductUnidad")?.value.trim() || null,
-        categoria_id: document.getElementById("editProductCategory")?.value || null,
-        proveedor_id: document.getElementById("editProductProveedor")?.value || null,
+        nombre: safeGetValue("editProductName")?.trim() || "",
+        descripcion: safeGetValue("editProductDesc")?.trim() || null,
+        precio_compra: parseFloat(safeGetValue("editProductPriceCompra") || 0),
+        precio_venta: parseFloat(safeGetValue("editProductPrice") || 0),
+        stock: parseInt(safeGetValue("editProductStock") || 0),
+        stock_minimo: parseInt(safeGetValue("editProductStockMin") || 5),
+        unidad: safeGetValue("editProductUnidad")?.trim() || null,
+        categoria_id: safeGetValue("editProductCategory") || null,
+        proveedor_id: safeGetValue("editProductProveedor") || null,
       };
       try {
         await api.put(`/api/productos/${editingId}`, data);

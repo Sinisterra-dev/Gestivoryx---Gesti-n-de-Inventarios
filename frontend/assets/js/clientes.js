@@ -1,6 +1,15 @@
 /**
  * Gestivoryx – Módulo de Clientes
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
   document.querySelectorAll('[href="login.html"]').forEach((el) => {
@@ -54,11 +63,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.post("/api/clientes/", {
-          nombre: document.getElementById("cliNombre").value.trim(),
-          documento: document.getElementById("cliDocumento")?.value.trim() || null,
-          telefono: document.getElementById("cliTelefono")?.value.trim() || null,
-          email: document.getElementById("cliEmail")?.value.trim() || null,
-          direccion: document.getElementById("cliDireccion")?.value.trim() || null,
+          nombre: safeGetValue("cliNombre")?.trim() || "",
+          documento: safeGetValue("cliDocumento")?.trim() || null,
+          telefono: safeGetValue("cliTelefono")?.trim() || null,
+          email: safeGetValue("cliEmail")?.trim() || null,
+          direccion: safeGetValue("cliDireccion")?.trim() || null,
         });
         showToast("Cliente creado", "success");
         closeModal("modalAgregarCliente");
@@ -74,11 +83,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.put(`/api/clientes/${editingId}`, {
-          nombre: document.getElementById("editCliNombre").value.trim(),
-          documento: document.getElementById("editCliDocumento")?.value.trim() || null,
-          telefono: document.getElementById("editCliTelefono")?.value.trim() || null,
-          email: document.getElementById("editCliEmail")?.value.trim() || null,
-          direccion: document.getElementById("editCliDireccion")?.value.trim() || null,
+          nombre: safeGetValue("editCliNombre")?.trim() || "",
+          documento: safeGetValue("editCliDocumento")?.trim() || null,
+          telefono: safeGetValue("editCliTelefono")?.trim() || null,
+          email: safeGetValue("editCliEmail")?.trim() || null,
+          direccion: safeGetValue("editCliDireccion")?.trim() || null,
         });
         showToast("Cliente actualizado", "success");
         closeModal("modalEditarCliente");

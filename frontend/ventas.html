@@ -421,7 +421,7 @@
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1.5">Agregar Producto</label>
             <div class="flex gap-2">
-              <select id="selectProductoVenta" class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+              <select id="ventaProducto" class="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
                 <option value="">Seleccionar producto...</option>
                 <option value="laptop" data-precio="3200000">Laptop HP ProBook ($3,200,000)</option>
                 <option value="mouse" data-precio="320000">Mouse Logitech MX ($320,000)</option>
@@ -449,7 +449,7 @@
                   </tr>
                 </thead>
                 <!-- Filas del carrito gestionadas por ventas.js -->
-                <tbody id="carritoBody">
+                <tbody id="tablaCarrito">
                   <tr id="carritoVacio">
                     <td colspan="5" class="px-4 py-6 text-center text-gray-400 text-xs">Sin productos agregados</td>
                   </tr>
@@ -476,7 +476,7 @@
           <!-- Total calculado -->
           <div class="flex items-center justify-between bg-gray-50 rounded-xl px-4 py-3">
             <span class="text-sm font-semibold text-gray-700">Total de la venta</span>
-            <span id="totalVenta" class="text-lg font-bold text-cyan-600">$0</span>
+            <span id="ventaTotal" class="text-lg font-bold text-cyan-600">$0</span>
           </div>
 
         </form>

@@ -1,6 +1,15 @@
 /**
  * Gestivoryx – Módulo de Proveedores
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
   document.querySelectorAll('[href="login.html"]').forEach((el) => {
@@ -54,11 +63,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.post("/api/proveedores/", {
-          nombre: document.getElementById("provNombre").value.trim(),
-          contacto: document.getElementById("provContacto")?.value.trim() || null,
-          telefono: document.getElementById("provTelefono")?.value.trim() || null,
-          email: document.getElementById("provEmail")?.value.trim() || null,
-          direccion: document.getElementById("provDireccion")?.value.trim() || null,
+          nombre: safeGetValue("provNombre")?.trim() || "",
+          contacto: safeGetValue("provContacto")?.trim() || null,
+          telefono: safeGetValue("provTelefono")?.trim() || null,
+          email: safeGetValue("provEmail")?.trim() || null,
+          direccion: safeGetValue("provDireccion")?.trim() || null,
         });
         showToast("Proveedor creado", "success");
         closeModal("modalAgregarProveedor");
@@ -74,11 +83,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.put(`/api/proveedores/${editingId}`, {
-          nombre: document.getElementById("editProvNombre").value.trim(),
-          contacto: document.getElementById("editProvContacto")?.value.trim() || null,
-          telefono: document.getElementById("editProvTelefono")?.value.trim() || null,
-          email: document.getElementById("editProvEmail")?.value.trim() || null,
-          direccion: document.getElementById("editProvDireccion")?.value.trim() || null,
+          nombre: safeGetValue("editProvNombre")?.trim() || "",
+          contacto: safeGetValue("editProvContacto")?.trim() || null,
+          telefono: safeGetValue("editProvTelefono")?.trim() || null,
+          email: safeGetValue("editProvEmail")?.trim() || null,
+          direccion: safeGetValue("editProvDireccion")?.trim() || null,
         });
         showToast("Proveedor actualizado", "success");
         closeModal("modalEditarProveedor");

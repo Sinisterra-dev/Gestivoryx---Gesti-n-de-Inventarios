@@ -1,6 +1,15 @@
 /**
  * Gestivoryx – Módulo de Usuarios (solo admin)
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
 
@@ -61,11 +70,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.post("/api/usuarios/", {
-          username: document.getElementById("usrUsername").value.trim(),
-          nombre: document.getElementById("usrNombre").value.trim(),
-          email: document.getElementById("usrEmail").value.trim(),
-          password: document.getElementById("usrPassword").value,
-          rol: document.getElementById("usrRol").value,
+          username: safeGetValue("usrUsername")?.trim() || "",
+          nombre: safeGetValue("usrNombre")?.trim() || "",
+          email: safeGetValue("usrEmail")?.trim() || "",
+          password: safeGetValue("usrPassword") || "",
+          rol: safeGetValue("usrRol") || "usuario",
         });
         showToast("Usuario creado exitosamente", "success");
         closeModal("modalAgregarUsuario");

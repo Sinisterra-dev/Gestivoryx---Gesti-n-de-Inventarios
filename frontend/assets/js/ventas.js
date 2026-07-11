@@ -2,6 +2,15 @@
  * Gestivoryx – Módulo de Ventas
  * Permite crear ventas con múltiples productos y detalle de líneas.
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
   document.querySelectorAll('[href="login.html"]').forEach((el) => {
@@ -100,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     if (totalEl) {
-      const descuento = parseFloat(document.getElementById("ventaDescuento")?.value || 0);
+      const descuento = parseFloat(safeGetValue("ventaDescuento") || 0);
       totalEl.textContent = "$" + Math.max(0, total - descuento).toLocaleString("es-CO");
     }
 
@@ -152,9 +161,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     formVenta.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!cartItems.length) { showToast("El carrito está vacío", "warning"); return; }
-      const descuento = parseFloat(document.getElementById("ventaDescuento")?.value || 0);
-      const cliente_id = document.getElementById("ventaCliente")?.value || null;
-      const notas = document.getElementById("ventaNotas")?.value || null;
+      const descuento = parseFloat(safeGetValue("ventaDescuento") || 0);
+      const cliente_id = safeGetValue("ventaCliente") || null;
+      const notas = safeGetValue("ventaNotas") || null;
       try {
         await api.post("/api/ventas/", {
           cliente_id: cliente_id ? parseInt(cliente_id) : null,

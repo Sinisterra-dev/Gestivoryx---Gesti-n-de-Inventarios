@@ -1,6 +1,15 @@
 /**
  * Gestivoryx – Módulo de Categorías
  */
+function safeGetValue(id) {
+  const el = document.getElementById(id);
+  if (!el) {
+    console.error(`Elemento no encontrado: ${id}`);
+    return null;
+  }
+  return el.value;
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
   document.querySelectorAll('[href="login.html"]').forEach((el) => {
@@ -54,8 +63,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.post("/api/categorias/", {
-          nombre: document.getElementById("catNombre").value.trim(),
-          descripcion: document.getElementById("catDesc")?.value.trim() || null,
+          nombre: safeGetValue("catNombre")?.trim() || "",
+          descripcion: safeGetValue("catDesc")?.trim() || null,
         });
         showToast("Categoría creada", "success");
         closeModal("modalAgregarCategoria");
@@ -71,8 +80,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       e.preventDefault();
       try {
         await api.put(`/api/categorias/${editingId}`, {
-          nombre: document.getElementById("editCatNombre").value.trim(),
-          descripcion: document.getElementById("editCatDesc")?.value.trim() || null,
+          nombre: safeGetValue("editCatNombre")?.trim() || "",
+          descripcion: safeGetValue("editCatDesc")?.trim() || null,
         });
         showToast("Categoría actualizada", "success");
         closeModal("modalEditarCategoria");
