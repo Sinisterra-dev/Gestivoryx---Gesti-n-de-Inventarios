@@ -19,9 +19,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   let clientes = [];
   let editingId = null;
 
-  function renderTable() {
-    const tbody = document.querySelector("#tablaClientes tbody");
-    if (!tbody) return;
+  function renderTable(retryCount = 0) {
+    const tbody = document.getElementById("tablaClientes");
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderTable: No se encontró tbody #tablaClientes, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderTable(retryCount + 1), 100);
+      } else {
+        console.error('renderTable: No se encontró tbody #tablaClientes después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaClientes" sin espacios ocultos.');
+      }
+      return;
+    }
     tbody.innerHTML = "";
     clientes.forEach((c) => {
       const badge = c.activo

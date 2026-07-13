@@ -564,8 +564,17 @@
     let carrito = [];
 
     // Agregar producto seleccionado al carrito
-    function agregarAlCarrito() {
-      const select = document.getElementById('selectProductoVenta');
+    function agregarAlCarrito(retryCount = 0) {
+      const select = document.getElementById('ventaProducto');
+      if (!select) {
+        if (retryCount < 50) {
+          console.warn(`agregarAlCarrito: No se encontró select #ventaProducto, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+          setTimeout(() => agregarAlCarrito(retryCount + 1), 100);
+        } else {
+          console.error('agregarAlCarrito: No se encontró select #ventaProducto después de 50 intentos. Verificar que el ID en HTML sea exactamente "ventaProducto" sin espacios ocultos.');
+        }
+        return;
+      }
       const opcion = select.options[select.selectedIndex];
       if (!opcion.value) return;
 

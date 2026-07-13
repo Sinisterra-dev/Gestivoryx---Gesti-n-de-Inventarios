@@ -56,9 +56,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   // ── Ventas table ───────────────────────────────────────────────────────────
-  function renderVentasTable() {
-    const tbody = document.querySelector("#tablaVentas tbody");
-    if (!tbody) return;
+  function renderVentasTable(retryCount = 0) {
+    const tbody = document.getElementById("tablaVentas");
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderVentasTable: No se encontró tbody #tablaVentas, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderVentasTable(retryCount + 1), 100);
+      } else {
+        console.error('renderVentasTable: No se encontró tbody #tablaVentas después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaVentas" sin espacios ocultos.');
+      }
+      return;
+    }
     tbody.innerHTML = "";
     ventas.forEach((v) => {
       const badge = v.estado === "completada"
@@ -87,10 +95,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   // ── Cart management ────────────────────────────────────────────────────────
-  function renderCart() {
-    const tbody = document.querySelector("#tablaCarrito tbody");
+  function renderCart(retryCount = 0) {
+    const tbody = document.getElementById("tablaCarrito");
     const totalEl = document.getElementById("ventaTotal");
-    if (!tbody) return;
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderCart: No se encontró tbody #tablaCarrito, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderCart(retryCount + 1), 100);
+      } else {
+        console.error('renderCart: No se encontró tbody #tablaCarrito después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaCarrito" sin espacios ocultos.');
+      }
+      return;
+    }
     tbody.innerHTML = "";
     let total = 0;
     cartItems.forEach((item, idx) => {

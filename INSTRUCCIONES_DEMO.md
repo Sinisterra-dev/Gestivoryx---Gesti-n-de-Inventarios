@@ -1,5 +1,5 @@
 # Instrucciones de demo y despliegue
-
+##
 Este proyecto se compone de:
 - `backend/` (FastAPI + SQLite)
 - `frontend/` (HTML/CSS/JS estático)

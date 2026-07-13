@@ -57,9 +57,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   // ── Render table ───────────────────────────────────────────────────────────
-  function renderTable() {
-    const tbody = document.querySelector("#tablaProductos tbody");
-    if (!tbody) return;
+  function renderTable(retryCount = 0) {
+    const tbody = document.getElementById("tablaProductos");
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderTable: No se encontró tbody #tablaProductos, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderTable(retryCount + 1), 100);
+      } else {
+        console.error('renderTable: No se encontró tbody #tablaProductos después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaProductos" sin espacios ocultos.');
+      }
+      return;
+    }
+    console.log('renderTable: Intentando pintar', productos.length, 'productos');
     tbody.innerHTML = "";
     productos.forEach((p) => {
       const stockClass = p.stock <= p.stock_minimo ? "text-danger fw-bold" : "";
@@ -85,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           </td>
         </tr>`;
     });
-
+    console.log('renderTable: Tabla actualizada con HTML');
     // Bind action buttons
     document.querySelectorAll(".btn-edit").forEach((btn) => {
       btn.addEventListener("click", () => openEditModal(parseInt(btn.dataset.id)));
@@ -99,6 +108,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function loadProductos() {
     try {
       productos = await api.get("/api/productos/?solo_activos=false");
+      console.log('Datos recibidos desde API (productos):', productos);
       renderTable();
       // Update stats boxes
       const activos = productos.filter((p) => p.activo).length;
@@ -109,6 +119,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if (boxes[1]) boxes[1].textContent = bajoStock;
       if (boxes[2]) boxes[2].textContent = agotados;
     } catch (e) {
+      console.error('Error al cargar productos:', e);
       showToast("Error al cargar productos", "error");
     }
   }

@@ -19,9 +19,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   let categorias = [];
   let editingId = null;
 
-  function renderTable() {
-    const tbody = document.querySelector("#tablaCategorias tbody");
-    if (!tbody) return;
+  function renderTable(retryCount = 0) {
+    const tbody = document.getElementById("tablaCategorias");
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderTable: No se encontró tbody #tablaCategorias, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderTable(retryCount + 1), 100);
+      } else {
+        console.error('renderTable: No se encontró tbody #tablaCategorias después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaCategorias" sin espacios ocultos.');
+      }
+      return;
+    }
+    console.log('renderTable: Intentando pintar', categorias.length, 'categorías');
     tbody.innerHTML = "";
     categorias.forEach((c) => {
       const badge = c.activo
@@ -38,6 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         </td>
       </tr>`;
     });
+    console.log('renderTable: Tabla actualizada con HTML');
     document.querySelectorAll(".btn-edit").forEach((btn) => {
       btn.addEventListener("click", () => openEdit(parseInt(btn.dataset.id)));
     });
@@ -49,10 +59,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function loadCategorias() {
     try {
       categorias = await api.get("/api/categorias/?solo_activas=false");
+      console.log('Datos recibidos desde API (categorias):', categorias);
       renderTable();
       const boxes = document.querySelectorAll(".small-box h3");
       if (boxes[0]) boxes[0].textContent = categorias.filter((c) => c.activo).length;
     } catch (e) {
+      console.error('Error al cargar categorías:', e);
       showToast("Error al cargar categorías", "error");
     }
   }

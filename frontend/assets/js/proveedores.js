@@ -19,9 +19,17 @@ document.addEventListener("DOMContentLoaded", async function () {
   let proveedores = [];
   let editingId = null;
 
-  function renderTable() {
-    const tbody = document.querySelector("#tablaProveedores tbody");
-    if (!tbody) return;
+  function renderTable(retryCount = 0) {
+    const tbody = document.getElementById("tablaProveedores");
+    if (!tbody) {
+      if (retryCount < 50) {
+        console.warn(`renderTable: No se encontró tbody #tablaProveedores, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => renderTable(retryCount + 1), 100);
+      } else {
+        console.error('renderTable: No se encontró tbody #tablaProveedores después de 50 intentos. Verificar que el ID en HTML sea exactamente "tablaProveedores" sin espacios ocultos.');
+      }
+      return;
+    }
     tbody.innerHTML = "";
     proveedores.forEach((p) => {
       const badge = p.activo
