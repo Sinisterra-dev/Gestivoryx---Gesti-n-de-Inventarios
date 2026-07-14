@@ -1,5 +1,6 @@
 /**
- * Gestivoryx – Módulo de Ajustes de Inventario (Movimientos)
+ * Gestivoryx – Módulo de Ajustes y Configuración
+ * Configuración de empresa y seguridad del sistema.
  */
 document.addEventListener("DOMContentLoaded", async function () {
   if (!requireAuth()) return;
@@ -7,83 +8,146 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.addEventListener("click", (e) => { e.preventDefault(); logout(); });
   });
 
-  let movimientos = [];
-  let productos = [];
+  const currentUser = getUser();
+  console.log("👤 Usuario actual cargado:", currentUser);
 
-  async function loadData() {
+  // ── Cargar datos iniciales ───────────────────────────────────────────────────────
+  async function loadInitialData() {
     try {
-      [movimientos, productos] = await Promise.all([
-        api.get("/api/movimientos/"),
-        api.get("/api/productos/"),
-      ]);
-      renderTable();
-      populateProductSelect();
-    } catch (e) {
-      showToast("Error cargando datos", "error");
+      console.log("📥 Cargando datos iniciales...");
+      
+      // Cargar datos del usuario actual desde la API
+      if (currentUser && currentUser.id) {
+        const userData = await api.get(`/api/usuarios/${currentUser.id}`);
+        console.log("✅ Datos del usuario cargados:", userData);
+        
+        // Auto-rellenar campos de perfil si existen
+        const nombreInput = document.getElementById("empresaNombre");
+        const emailInput = document.getElementById("empresaEmail");
+        
+        if (nombreInput && userData.nombre) {
+          nombreInput.value = userData.nombre;
+        }
+        if (emailInput && userData.email) {
+          emailInput.value = userData.email;
+        }
+      }
+
+      // Cargar configuración de empresa desde localStorage (si existe)
+      const empresaConfig = localStorage.getItem("gestivoryx_empresa_config");
+      if (empresaConfig) {
+        console.log("📦 Configuración de empresa encontrada en localStorage");
+        const config = JSON.parse(empresaConfig);
+        
+        const telefonoInput = document.getElementById("empresaTelefono");
+        const direccionInput = document.getElementById("empresaDireccion");
+        const monedaSelect = document.getElementById("empresaMoneda");
+        
+        if (telefonoInput && config.telefono) telefonoInput.value = config.telefono;
+        if (direccionInput && config.direccion) direccionInput.value = config.direccion;
+        if (monedaSelect && config.moneda) monedaSelect.value = config.moneda;
+      }
+      
+      console.log("✅ Datos iniciales cargados exitosamente");
+    } catch (err) {
+      console.error("❌ Error al cargar datos iniciales:", err);
+      // No mostramos error al usuario ya que son datos opcionales
     }
   }
 
-  function populateProductSelect() {
-    const sel = document.getElementById("movProducto");
-    if (!sel) return;
-    sel.innerHTML = '<option value="">Seleccionar producto...</option>';
-    productos.forEach((p) => {
-      sel.innerHTML += `<option value="${p.id}">${p.nombre} (Stock: ${p.stock})</option>`;
-    });
-  }
+  await loadInitialData();
 
-  function renderTable() {
-    const tbody = document.querySelector("#tablaAjustes tbody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    movimientos.forEach((m) => {
-      const typeClass = m.tipo === "entrada" ? "badge-success" : m.tipo === "salida" ? "badge-danger" : "badge-warning";
-      tbody.innerHTML += `<tr>
-        <td>${m.id}</td>
-        <td>${m.producto?.nombre || m.producto_id}</td>
-        <td><span class="badge ${typeClass}">${m.tipo}</span></td>
-        <td>${m.cantidad}</td>
-        <td>${m.stock_anterior} → ${m.stock_nuevo}</td>
-        <td>${m.motivo || "-"}</td>
-        <td>${formatDate(m.creado_en)}</td>
-        <td>${m.usuario?.nombre || "-"}</td>
-      </tr>`;
-    });
-  }
-
-  const form = document.getElementById("formAjuste");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
+  // ── Configuración General ───────────────────────────────────────────────────────
+  const formConfigGeneral = document.getElementById("formConfigGeneral");
+  if (formConfigGeneral) {
+    formConfigGeneral.addEventListener("submit", async (e) => {
       e.preventDefault();
       try {
-        await api.post("/api/movimientos/", {
-          producto_id: parseInt(document.getElementById("movProducto").value),
-          tipo: document.getElementById("movTipo").value,
-          cantidad: parseInt(document.getElementById("movCantidad").value),
-          motivo: document.getElementById("movMotivo")?.value.trim() || null,
+        console.log("💾 Guardando configuración de empresa...");
+        
+        const config = {
+          nombre: document.getElementById("empresaNombre")?.value || "Gestivoryx",
+          email: document.getElementById("empresaEmail")?.value || "",
+          telefono: document.getElementById("empresaTelefono")?.value || "",
+          direccion: document.getElementById("empresaDireccion")?.value || "",
+          moneda: document.getElementById("empresaMoneda")?.value || "COP"
+        };
+        
+        console.log("📦 Configuración a guardar:", config);
+        
+        // Guardar en localStorage
+        localStorage.setItem("gestivoryx_empresa_config", JSON.stringify(config));
+        
+        console.log("✅ Configuración guardada en localStorage");
+        showToast("Configuración guardada correctamente", "success");
+      } catch (err) {
+        console.error("❌ Error al guardar configuración:", err);
+        showToast(err.message, "error");
+      }
+    });
+  }
+
+  // ── Cambiar Contraseña ───────────────────────────────────────────────────────────
+  const formCambiarPassword = document.getElementById("formCambiarPassword");
+  if (formCambiarPassword) {
+    formCambiarPassword.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const currentPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(1)').value;
+      const newPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(2)').value;
+      const confirmPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(3)').value;
+
+      console.log("🔐 Intentando cambiar contraseña");
+      console.log("Usuario actual:", currentUser);
+
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        showToast("Completa todos los campos", "warning");
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        showToast("Las contraseñas no coinciden", "error");
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        showToast("La contraseña debe tener al menos 6 caracteres", "error");
+        return;
+      }
+
+      try {
+        // Usar el endpoint PUT /api/usuarios/{id} con el campo password
+        if (!currentUser || !currentUser.id) {
+          showToast("Error: No se pudo identificar el usuario actual", "error");
+          console.error("❌ No hay usuario actual en localStorage");
+          return;
+        }
+
+        console.log(`📤 Enviando petición a /api/usuarios/${currentUser.id}`);
+        console.log("Payload:", { password: newPassword });
+
+        const response = await api.put(`/api/usuarios/${currentUser.id}`, {
+          password: newPassword
         });
-        showToast("Movimiento registrado", "success");
-        closeModal("modalAjuste");
-        form.reset();
-        await loadData();
-      } catch (err) { showToast(err.message, "error"); }
+
+        console.log("✅ Respuesta del servidor:", response);
+        showToast("Contraseña actualizada correctamente", "success");
+        formCambiarPassword.reset();
+      } catch (err) {
+        console.error("❌ Error al cambiar contraseña:", err);
+        console.error("Mensaje de error:", err.message);
+        
+        // Mostrar error específico según el tipo
+        if (err.message.includes("401") || err.message.includes("403")) {
+          showToast("Error: No tienes permisos para realizar esta acción", "error");
+        } else if (err.message.includes("404")) {
+          showToast("Error: Usuario no encontrado", "error");
+        } else if (err.message.includes("422")) {
+          showToast("Error: Datos inválidos. Verifica que la contraseña tenga al menos 6 caracteres", "error");
+        } else {
+          showToast("Error al actualizar contraseña: " + err.message, "error");
+        }
+      }
     });
   }
-
-  function openModal(id) {
-    const el = document.getElementById(id);
-    if (el) { el.style.display = "block"; el.classList.add("show"); }
-  }
-  function closeModal(id) {
-    const el = document.getElementById(id);
-    if (el) { el.style.display = "none"; el.classList.remove("show"); }
-  }
-  document.querySelectorAll("[data-dismiss='modal']").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const modal = btn.closest(".modal");
-      if (modal) closeModal(modal.id);
-    });
-  });
-
-  await loadData();
 });
+

@@ -60,6 +60,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
       proveedores = await api.get("/api/proveedores/?solo_activos=false");
       renderTable();
+      
+      // Update summary cards
+      const total = proveedores.length;
+      const activos = proveedores.filter((p) => p.activo).length;
+      
+      const elActivos = document.getElementById("cardProveedoresActivos");
+      const elTotal = document.getElementById("cardTotalProveedores");
+      
+      if (elActivos) elActivos.textContent = activos;
+      if (elTotal) elTotal.textContent = total;
     } catch (e) {
       showToast("Error al cargar proveedores", "error");
     }

@@ -20,42 +20,86 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   const currentUser = getUser();
 
+  // ── STRICT ADMIN ROLE CHECK ─────────────────────────────────────────────────
+  // Verificar rol ANTES de cualquier petición API para evitar fuga de datos
+  if (!currentUser || currentUser.rol !== "admin") {
+    console.warn("⛔ Acceso denegado: Usuario no es administrador");
+    // Limpiar contenido inmediatamente
+    document.body.innerHTML = `
+      <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #f3f4f6; flex-direction: column; font-family: Inter, sans-serif;">
+        <div style="text-align: center; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+          <svg style="width: 4rem; height: 4rem; color: #ef4444; margin-bottom: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <h2 style="font-size: 1.5rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">Acceso Denegado</h2>
+          <p style="color: #6b7280; margin-bottom: 1.5rem;">No tienes permisos para acceder a esta página.</p>
+          <a href="dashboard.html" style="display: inline-block; padding: 0.75rem 1.5rem; background: #0891b2; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: 500;">
+            Ir al Dashboard
+          </a>
+        </div>
+      </div>
+    `;
+    return; // Detener ejecución
+  }
+
   let usuarios = [];
 
   function renderTable() {
-    const tbody = document.getElementById("tablaUsuariosBody");
-    if (!tbody) return;
-    tbody.innerHTML = "";
-    usuarios.forEach((u) => {
-      const rolBadge = u.rol === "admin"
-        ? '<span class="badge badge-primary">Administrador</span>'
-        : '<span class="badge badge-info">Usuario</span>';
-      const estadoBadge = u.activo
-        ? '<span class="badge badge-success">Activo</span>'
-        : '<span class="badge badge-danger">Inactivo</span>';
-      const isSelf = currentUser && currentUser.id === u.id;
-      tbody.innerHTML += `<tr>
-        <td>${u.id}</td>
-        <td>${u.nombre} <small class="text-muted">(${u.username})</small></td>
-        <td>${u.email}</td>
-        <td>${rolBadge}</td>
-        <td>${estadoBadge}</td>
-        <td>
-          ${!isSelf ? `<button class="btn btn-sm btn-danger btn-delete-usr" data-id="${u.id}" title="Eliminar"><i class="fas fa-trash"></i></button>` : '<span class="text-muted">—</span>'}
-        </td>
-      </tr>`;
-    });
-
-    document.querySelectorAll(".btn-delete-usr").forEach((btn) => {
-      btn.addEventListener("click", () => deleteUsuario(parseInt(btn.dataset.id)));
-    });
+    const tbody = document.getElementById("tablaUsuarios");
+    if (!tbody) {
+      console.error("❌ No se encontró tbody con id 'tablaUsuarios'");
+      return;
+    }
+    try {
+      console.log("📊 Intentando renderizar tabla con", usuarios.length, "usuarios");
+      tbody.innerHTML = "";
+      usuarios.forEach((u) => {
+        console.log("👤 Procesando usuario:", u);
+        const rolBadge = u.rol === "admin"
+          ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Admin</span>'
+          : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-800">Usuario</span>';
+        const estadoBadge = u.activo
+          ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Activo</span>'
+          : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Inactivo</span>';
+        const isSelf = currentUser && currentUser.id === u.id;
+        tbody.innerHTML += `<tr class="hover:bg-gray-50/50 transition-colors">
+          <td class="px-4 py-3 text-sm text-gray-500">${u.id}</td>
+          <td class="px-4 py-3 text-sm font-medium text-gray-800">${u.nombre}</td>
+          <td class="px-4 py-3 text-sm text-gray-600 font-mono">${u.username}</td>
+          <td class="px-4 py-3 text-sm text-gray-600">${u.email}</td>
+          <td class="px-4 py-3">${rolBadge}</td>
+          <td class="px-4 py-3">${estadoBadge}</td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-1">
+              ${!isSelf ? `<button class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors btn-delete-usr" data-id="${u.id}" title="Eliminar usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                </svg>
+              </button>` : '<span class="text-slate-300 text-xs">—</span>'}
+            </div>
+          </td>
+        </tr>`;
+      });
+      console.log("✅ Tabla renderizada exitosamente");
+      
+      // Bind delete buttons after rendering
+      document.querySelectorAll(".btn-delete-usr").forEach((btn) => {
+        btn.addEventListener("click", () => deleteUsuario(parseInt(btn.dataset.id)));
+      });
+    } catch (error) {
+      console.error("❌ Error al pintar la tabla:", error);
+      alert("Error al pintar la tabla: " + error.message);
+    }
   }
 
   async function loadUsuarios() {
     try {
+      console.log("📥 Cargando usuarios desde /api/usuarios/");
       usuarios = await api.get("/api/usuarios/");
+      console.log("✅ Usuarios recibidos del backend:", usuarios);
       renderTable();
     } catch (e) {
+      console.error("❌ Error al cargar usuarios:", e);
       if (e.message.includes("403") || e.message.includes("401")) {
         showToast("Solo administradores pueden ver usuarios", "warning");
       } else {

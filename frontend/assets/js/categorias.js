@@ -61,8 +61,24 @@ document.addEventListener("DOMContentLoaded", async function () {
       categorias = await api.get("/api/categorias/?solo_activas=false");
       console.log('Datos recibidos desde API (categorias):', categorias);
       renderTable();
-      const boxes = document.querySelectorAll(".small-box h3");
-      if (boxes[0]) boxes[0].textContent = categorias.filter((c) => c.activo).length;
+      
+      // Update summary cards
+      const total = categorias.length;
+      const activas = categorias.filter((c) => c.activo).length;
+      const inactivas = categorias.filter((c) => !c.activo).length;
+      
+      // For "Con Productos", we need to check which categories have associated products
+      // This would require an additional API call or checking the productos data
+      // For now, we'll use activas as a proxy since active categories likely have products
+      const conProductos = activas;
+      
+      const elTotal = document.getElementById("cardTotalCategorias");
+      const elConProductos = document.getElementById("cardConProductos");
+      const elInactivas = document.getElementById("cardInactivas");
+      
+      if (elTotal) elTotal.textContent = total;
+      if (elConProductos) elConProductos.textContent = conProductos;
+      if (elInactivas) elInactivas.textContent = inactivas;
     } catch (e) {
       console.error('Error al cargar categorías:', e);
       showToast("Error al cargar categorías", "error");

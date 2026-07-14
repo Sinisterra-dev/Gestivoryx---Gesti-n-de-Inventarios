@@ -36,17 +36,16 @@ function requireAuth() {
     window.location.href = "login.html";
     return false;
   }
-  // Populate user info in sidebar if elements exist
+  // Populate user info in sidebar and header if elements exist
   const user = getUser();
   if (user) {
-    const nameEl = document.querySelector(".user-name");
-    const roleEl = document.querySelector(".user-role");
-    if (nameEl) nameEl.textContent = user.nombre || user.username;
-    if (roleEl) roleEl.textContent = user.rol === "admin" ? "Administrador" : "Usuario";
-    // Top bar username
-    document.querySelectorAll(".d-none.d-md-inline").forEach((el) => {
-      el.textContent = user.nombre || user.username;
-    });
+    const nameEls = document.querySelectorAll(".user-name");
+    const roleEls = document.querySelectorAll(".user-role");
+    const userName = user.nombre || user.username;
+    const userRole = user.rol === "admin" ? "Administrador" : "Usuario";
+    
+    nameEls.forEach((el) => el.textContent = userName);
+    roleEls.forEach((el) => el.textContent = userRole);
   }
   return true;
 }

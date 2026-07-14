@@ -60,6 +60,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
       clientes = await api.get("/api/clientes/?solo_activos=false");
       renderTable();
+      
+      // Update summary cards
+      const total = clientes.length;
+      const activos = clientes.filter((c) => c.activo).length;
+      
+      // Calculate clientes nuevos este mes (created in current month)
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      const nuevosMes = clientes.filter((c) => {
+        if (!c.creado_en) return false;
+        const createdDate = new Date(c.creado_en);
+        return createdDate.getMonth() === currentMonth && createdDate.getFullYear() === currentYear;
+      }).length;
+      
+      const elActivos = document.getElementById("cardClientesActivos");
+      const elTotal = document.getElementById("cardTotalClientes");
+      const elNuevosMes = document.getElementById("cardNuevosMes");
+      
+      if (elActivos) elActivos.textContent = activos;
+      if (elTotal) elTotal.textContent = total;
+      if (elNuevosMes) elNuevosMes.textContent = nuevosMes;
     } catch (e) {
       showToast("Error al cargar clientes", "error");
     }

@@ -32,9 +32,68 @@ document.addEventListener("DOMContentLoaded", async function () {
       ]);
       renderVentasTable();
       populateSelects();
+      updateSummaryCards();
     } catch (e) {
       showToast("Error cargando datos", "error");
     }
+  }
+
+  // ── Update summary cards ─────────────────────────────────────────────────────
+  function updateSummaryCards() {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    
+    const mesActual = new Date();
+    mesActual.setDate(1);
+    mesActual.setHours(0, 0, 0, 0);
+    
+    // Ventas hoy (completadas)
+    const ventasHoy = ventas.filter((v) => {
+      const ventaFecha = new Date(v.creado_en);
+      ventaFecha.setHours(0, 0, 0, 0);
+      return ventaFecha.getTime() === hoy.getTime() && v.estado === "completada";
+    }).length;
+    
+    // Ingresos del mes (completadas)
+    const ingresosMes = ventas
+      .filter((v) => {
+        const ventaFecha = new Date(v.creado_en);
+        ventaFecha.setHours(0, 0, 0, 0);
+        return ventaFecha >= mesActual && v.estado === "completada";
+      })
+      .reduce((sum, v) => sum + v.total, 0);
+    
+    // Clientes únicos atendidos hoy
+    const clientesUnicosHoy = new Set(
+      ventas
+        .filter((v) => {
+          const ventaFecha = new Date(v.creado_en);
+          ventaFecha.setHours(0, 0, 0, 0);
+          return ventaFecha.getTime() === hoy.getTime() && v.estado === "completada";
+        })
+        .map((v) => v.cliente_id || "consumidor_final")
+    ).size;
+    
+    // Ticket promedio del mes
+    const ventasMesCompletadas = ventas.filter((v) => {
+      const ventaFecha = new Date(v.creado_en);
+      ventaFecha.setHours(0, 0, 0, 0);
+      return ventaFecha >= mesActual && v.estado === "completada";
+    });
+    const ticketPromedio = ventasMesCompletadas.length > 0 
+      ? ingresosMes / ventasMesCompletadas.length 
+      : 0;
+    
+    // Update DOM elements
+    const elVentasHoy = document.getElementById("cardVentasHoy");
+    const elTotalMes = document.getElementById("cardTotalMes");
+    const elClientesAtendidos = document.getElementById("cardClientesAtendidos");
+    const elTicketPromedio = document.getElementById("cardTicketPromedio");
+    
+    if (elVentasHoy) elVentasHoy.textContent = ventasHoy;
+    if (elTotalMes) elTotalMes.textContent = "$" + (ingresosMes / 1000000).toFixed(1) + "M";
+    if (elClientesAtendidos) elClientesAtendidos.textContent = clientesUnicosHoy;
+    if (elTicketPromedio) elTicketPromedio.textContent = "$" + (ticketPromedio / 1000).toFixed(0) + "K";
   }
 
   function populateSelects() {
@@ -144,10 +203,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  const btnAddToCart = document.getElementById("btnAgregarCarrito");
-  if (btnAddToCart) {
+  // ── Add to cart button with observer pattern ───────────────────────────────
+  function setupAddToCartButton(retryCount = 0) {
+    const btnAddToCart = document.getElementById("btnAgregarCarrito");
+    if (!btnAddToCart) {
+      if (retryCount < 50) {
+        console.warn(`setupAddToCartButton: No se encontró btnAgregarCarrito, reintentando en 100ms (intento ${retryCount + 1}/50)`);
+        setTimeout(() => setupAddToCartButton(retryCount + 1), 100);
+      } else {
+        console.error('setupAddToCartButton: No se encontró btnAgregarCarrito después de 50 intentos.');
+      }
+      return;
+    }
+    
     btnAddToCart.addEventListener("click", () => {
       const sel = document.getElementById("ventaProducto");
+      if (!sel) {
+        showToast("Error: selector de productos no encontrado", "error");
+        return;
+      }
       const opt = sel?.options[sel.selectedIndex];
       if (!opt || !opt.value) { showToast("Selecciona un producto", "warning"); return; }
       const id = parseInt(opt.value);
@@ -167,6 +241,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       sel.value = "";
     });
   }
+  
+  setTimeout(() => setupAddToCartButton(), 100);
 
   const descInput = document.getElementById("ventaDescuento");
   if (descInput) descInput.addEventListener("input", renderCart);

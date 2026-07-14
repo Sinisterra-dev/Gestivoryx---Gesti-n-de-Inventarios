@@ -191,7 +191,7 @@
             </svg>
           </div>
         </div>
-        <p class="text-3xl font-bold text-gray-900">12</p>
+        <p class="text-3xl font-bold text-gray-900" id="cardVentasHoy">-</p>
         <p class="text-xs text-gray-400 mt-1">Transacciones registradas</p>
       </div>
 
@@ -205,7 +205,7 @@
             </svg>
           </div>
         </div>
-        <p class="text-3xl font-bold text-gray-900">$2.8M</p>
+        <p class="text-3xl font-bold text-gray-900" id="cardTotalMes">-</p>
         <p class="text-xs text-gray-400 mt-1">Ingresos acumulados</p>
       </div>
 
@@ -219,7 +219,7 @@
             </svg>
           </div>
         </div>
-        <p class="text-3xl font-bold text-gray-900">9</p>
+        <p class="text-3xl font-bold text-gray-900" id="cardClientesAtendidos">-</p>
         <p class="text-xs text-gray-400 mt-1">Clientes únicos hoy</p>
       </div>
 
@@ -233,7 +233,7 @@
             </svg>
           </div>
         </div>
-        <p class="text-3xl font-bold text-gray-900">$233K</p>
+        <p class="text-3xl font-bold text-gray-900" id="cardTicketPromedio">-</p>
         <p class="text-xs text-gray-400 mt-1">Por transacción</p>
       </div>
     </div>
@@ -428,7 +428,7 @@
                 <option value="teclado" data-precio="185000">Teclado Mecánico ($185,000)</option>
                 <option value="monitor" data-precio="1450000">Monitor Samsung 27" ($1,450,000)</option>
               </select>
-              <button type="button" onclick="agregarAlCarrito()" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors whitespace-nowrap">
+              <button type="button" id="btnAgregarCarrito" class="px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors whitespace-nowrap">
                 Agregar
               </button>
             </div>

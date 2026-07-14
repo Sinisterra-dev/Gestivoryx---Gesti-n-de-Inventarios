@@ -78,11 +78,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       tbody.innerHTML += `
         <tr>
           <td>${p.id}</td>
-          <td><i class="fas fa-box text-muted"></i></td>
-          <td><strong>${p.nombre}</strong><br><small class="text-muted">${p.codigo}</small></td>
+          <td><strong>${p.nombre}</strong></td>
           <td>${p.categoria ? p.categoria.nombre : "-"}</td>
           <td>$${p.precio_venta.toLocaleString("es-CO")}</td>
-          <td class="${stockClass}">${p.stock} ${p.unidad || "uds"}</td>
+          <td class="${stockClass}">${p.stock}</td>
           <td>${estadoBadge}</td>
           <td>
             <button class="btn btn-sm btn-warning btn-edit" data-id="${p.id}" title="Editar">
@@ -110,14 +109,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       productos = await api.get("/api/productos/?solo_activos=false");
       console.log('Datos recibidos desde API (productos):', productos);
       renderTable();
-      // Update stats boxes
-      const activos = productos.filter((p) => p.activo).length;
-      const bajoStock = productos.filter((p) => p.activo && p.stock <= p.stock_minimo).length;
+      
+      // Update summary cards
+      const total = productos.filter((p) => p.activo).length;
+      const enStock = productos.filter((p) => p.activo && p.stock > p.stock_minimo).length;
+      const bajoStock = productos.filter((p) => p.activo && p.stock > 0 && p.stock <= p.stock_minimo).length;
       const agotados = productos.filter((p) => p.activo && p.stock === 0).length;
-      const boxes = document.querySelectorAll(".small-box h3");
-      if (boxes[0]) boxes[0].textContent = activos;
-      if (boxes[1]) boxes[1].textContent = bajoStock;
-      if (boxes[2]) boxes[2].textContent = agotados;
+      
+      const elTotal = document.getElementById("cardTotalProductos");
+      const elEnStock = document.getElementById("cardEnStock");
+      const elBajoStock = document.getElementById("cardBajoStock");
+      const elAgotados = document.getElementById("cardAgotados");
+      
+      if (elTotal) elTotal.textContent = total;
+      if (elEnStock) elEnStock.textContent = enStock;
+      if (elBajoStock) elBajoStock.textContent = bajoStock;
+      if (elAgotados) elAgotados.textContent = agotados;
     } catch (e) {
       console.error('Error al cargar productos:', e);
       showToast("Error al cargar productos", "error");
