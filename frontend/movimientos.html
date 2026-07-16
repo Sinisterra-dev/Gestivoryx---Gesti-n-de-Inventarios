@@ -221,10 +221,10 @@
       <!-- ============================================================
            TARJETAS DE ESTADÍSTICAS — resumen del estado del inventario
            ============================================================ -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
 
         <!-- Tarjeta: Total de movimientos registrados -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
           <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
@@ -237,7 +237,7 @@
         </div>
 
         <!-- Tarjeta: Entradas de inventario (color verde) -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
           <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"/>
@@ -250,7 +250,7 @@
         </div>
 
         <!-- Tarjeta: Salidas de inventario (color rojo) -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
           <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6"/>
@@ -263,7 +263,7 @@
         </div>
 
         <!-- Tarjeta: Ajustes manuales de inventario (color azul) -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
           <div class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center flex-shrink-0">
             <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -315,210 +315,11 @@
             </thead>
             <!-- Cuerpo de la tabla — datos de ejemplo (mock data) y datos del backend via JS -->
             <tbody id="tablaMovimientos" class="divide-y divide-gray-50">
-
-              <!-- Fila de ejemplo: Entrada de inventario (badge verde) -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">248</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Laptop Dell XPS 15</span>
-                  <span class="block text-xs text-gray-400">PROD-001</span>
+              <tr>
+                <td colspan="9" class="px-6 py-8 text-center text-gray-400">
+                  Cargando movimientos...
                 </td>
-                <td class="px-6 py-4">
-                  <!-- Badge verde para entradas -->
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                    Entrada
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-emerald-600">+50</td>
-                <td class="px-6 py-4 text-gray-600">30</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">80</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Reposición de stock mensual</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">12 mar 2026, 10:25</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
               </tr>
-
-              <!-- Fila de ejemplo: Salida de inventario (badge rojo) -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">247</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Monitor LG 27"</span>
-                  <span class="block text-xs text-gray-400">PROD-004</span>
-                </td>
-                <td class="px-6 py-4">
-                  <!-- Badge rojo para salidas -->
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    Salida
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-red-600">-3</td>
-                <td class="px-6 py-4 text-gray-600">15</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">12</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Venta VTA-20260312-0038</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">12 mar 2026, 09:48</td>
-                <td class="px-6 py-4 text-gray-600">jdoe</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Ajuste de inventario (badge cyan) -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">246</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Teclado Mecánico Keychron K2</span>
-                  <span class="block text-xs text-gray-400">PROD-007</span>
-                </td>
-                <td class="px-6 py-4">
-                  <!-- Badge cyan para ajustes manuales -->
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-800">
-                    Ajuste
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-cyan-600">25</td>
-                <td class="px-6 py-4 text-gray-600">18</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">25</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Conteo físico de inventario</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">11 mar 2026, 16:30</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Entrada de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">245</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Mouse Logitech MX Master 3</span>
-                  <span class="block text-xs text-gray-400">PROD-003</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                    Entrada
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-emerald-600">+100</td>
-                <td class="px-6 py-4 text-gray-600">5</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">105</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Orden de compra OC-2026-042</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">11 mar 2026, 11:15</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Salida de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">244</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Audífonos Sony WH-1000XM5</span>
-                  <span class="block text-xs text-gray-400">PROD-009</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    Salida
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-red-600">-1</td>
-                <td class="px-6 py-4 text-gray-600">8</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">7</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Venta VTA-20260311-0037</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">11 mar 2026, 09:02</td>
-                <td class="px-6 py-4 text-gray-600">mlopez</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Entrada de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">243</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Webcam Logitech C920</span>
-                  <span class="block text-xs text-gray-400">PROD-012</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                    Entrada
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-emerald-600">+20</td>
-                <td class="px-6 py-4 text-gray-600">0</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">20</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Reposición de producto agotado</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">10 mar 2026, 14:50</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Ajuste de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">242</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Cable HDMI 2.0 Premium</span>
-                  <span class="block text-xs text-gray-400">PROD-021</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-800">
-                    Ajuste
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-cyan-600">45</td>
-                <td class="px-6 py-4 text-gray-600">52</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">45</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Diferencia encontrada en auditoría</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">10 mar 2026, 10:20</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Salida de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">241</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Laptop Dell XPS 15</span>
-                  <span class="block text-xs text-gray-400">PROD-001</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    Salida
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-red-600">-2</td>
-                <td class="px-6 py-4 text-gray-600">32</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">30</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Venta VTA-20260310-0036</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">10 mar 2026, 08:35</td>
-                <td class="px-6 py-4 text-gray-600">jdoe</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Entrada de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">240</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">SSD Samsung 970 EVO 1TB</span>
-                  <span class="block text-xs text-gray-400">PROD-016</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                    Entrada
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-emerald-600">+30</td>
-                <td class="px-6 py-4 text-gray-600">10</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">40</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Orden de compra OC-2026-041</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">9 mar 2026, 16:00</td>
-                <td class="px-6 py-4 text-gray-600">admin</td>
-              </tr>
-
-              <!-- Fila de ejemplo: Salida de inventario -->
-              <tr class="hover:bg-gray-50 transition-colors">
-                <td class="px-6 py-4 text-gray-400 font-mono text-xs">239</td>
-                <td class="px-6 py-4">
-                  <span class="font-medium text-gray-900">Teclado Mecánico Keychron K2</span>
-                  <span class="block text-xs text-gray-400">PROD-007</span>
-                </td>
-                <td class="px-6 py-4">
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                    Salida
-                  </span>
-                </td>
-                <td class="px-6 py-4 font-semibold text-red-600">-5</td>
-                <td class="px-6 py-4 text-gray-600">23</td>
-                <td class="px-6 py-4 text-gray-900 font-medium">18</td>
-                <td class="px-6 py-4 text-gray-600 max-w-xs truncate">Venta VTA-20260309-0035</td>
-                <td class="px-6 py-4 text-gray-500 text-xs whitespace-nowrap">9 mar 2026, 11:45</td>
-                <td class="px-6 py-4 text-gray-600">mlopez</td>
-              </tr>
-
             </tbody>
           </table>
         </div>

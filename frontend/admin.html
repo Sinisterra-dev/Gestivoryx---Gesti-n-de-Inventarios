@@ -63,7 +63,7 @@
   <link rel="stylesheet" href="assets/css/tailwind-theme.css" />
   <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 overflow-x-hidden">
 
   <!-- ============================================================
        Barra lateral de navegación fija con fondo oscuro
@@ -189,7 +189,7 @@
   <div id="main-content" class="ml-64 flex flex-col min-h-screen">
 
     <!-- Encabezado superior de la página -->
-    <header class="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+    <header class="bg-white border-b border-gray-100 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between sticky top-0 z-20">
       <!-- Botón para alternar el sidebar en móviles + Título de la página -->
       <div class="flex items-center gap-4">
         <button id="menu-toggle" class="p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors md:hidden">
@@ -204,27 +204,47 @@
       </div>
 
       <!-- Información del usuario en el header -->
-      <div class="flex items-center gap-3">
-        <span class="text-sm text-gray-500 hidden sm:block">Bienvenido,</span>
-        <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100">
-          <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-            </svg>
+      <div class="relative">
+        <button id="userMenuBtn" class="flex items-center gap-2 focus:outline-none">
+          <span class="text-sm text-gray-500 hidden sm:block">Bienvenido,</span>
+          <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100">
+            <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
           </div>
-          <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
+        </button>
+        <!-- Dropdown Menu -->
+        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+          <a href="ajustes.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Ajustes
+          </a>
+          <div class="border-t border-gray-100 my-1"></div>
+          <button id="logoutBtn" class="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            Cerrar Sesión
+          </button>
         </div>
       </div>
     </header>
 
     <!-- Contenido principal del dashboard -->
-    <main class="flex-1 p-6 space-y-6">
+    <main class="flex-1 py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto space-y-6">
 
       <!-- ── Fila de tarjetas de estadísticas ── -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
         <!-- Tarjeta: Total Productos -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
           <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,7 +258,7 @@
         </div>
 
         <!-- Tarjeta: Ventas Hoy -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
           <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,7 +272,7 @@
         </div>
 
         <!-- Tarjeta: Ingresos del Mes -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
           <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -266,7 +286,7 @@
         </div>
 
         <!-- Tarjeta: Bajo Stock -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
           <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,10 +301,10 @@
       </div>
 
       <!-- ── Fila inferior: tabla de ventas recientes + acciones rápidas ── -->
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
 
         <!-- Tabla de ventas recientes (ocupa 2/3 del espacio) -->
-        <div class="xl:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100">
+        <div class="xl:col-span-2 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <h2 class="font-semibold text-gray-900">Ventas Recientes</h2>
             <a href="ventas.html" class="text-xs text-cyan-600 hover:text-cyan-700 font-medium">Ver todas →</a>
@@ -302,40 +322,10 @@
               </thead>
               <!-- Datos de ventas recientes (datos de ejemplo) -->
               <tbody id="tablaVentasRecientes" class="divide-y divide-gray-50">
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="px-6 py-3.5 text-sm text-gray-600">#1048</td>
-                  <td class="px-6 py-3.5 text-sm font-medium text-gray-900">Juan García</td>
-                  <td class="px-6 py-3.5 text-sm text-gray-700">$450,000</td>
-                  <td class="px-6 py-3.5"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span></td>
-                  <td class="px-6 py-3.5 text-sm text-gray-500">Hoy, 10:23</td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="px-6 py-3.5 text-sm text-gray-600">#1047</td>
-                  <td class="px-6 py-3.5 text-sm font-medium text-gray-900">María López</td>
-                  <td class="px-6 py-3.5 text-sm text-gray-700">$1,200,000</td>
-                  <td class="px-6 py-3.5"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span></td>
-                  <td class="px-6 py-3.5 text-sm text-gray-500">Hoy, 09:45</td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="px-6 py-3.5 text-sm text-gray-600">#1046</td>
-                  <td class="px-6 py-3.5 text-sm font-medium text-gray-900">Carlos Rodríguez</td>
-                  <td class="px-6 py-3.5 text-sm text-gray-700">$320,000</td>
-                  <td class="px-6 py-3.5"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">Pendiente</span></td>
-                  <td class="px-6 py-3.5 text-sm text-gray-500">Ayer, 17:30</td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="px-6 py-3.5 text-sm text-gray-600">#1045</td>
-                  <td class="px-6 py-3.5 text-sm font-medium text-gray-900">Ana Martínez</td>
-                  <td class="px-6 py-3.5 text-sm text-gray-700">$870,000</td>
-                  <td class="px-6 py-3.5"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">Completada</span></td>
-                  <td class="px-6 py-3.5 text-sm text-gray-500">Ayer, 14:15</td>
-                </tr>
-                <tr class="hover:bg-gray-50 transition-colors">
-                  <td class="px-6 py-3.5 text-sm text-gray-600">#1044</td>
-                  <td class="px-6 py-3.5 text-sm font-medium text-gray-900">Pedro Sánchez</td>
-                  <td class="px-6 py-3.5 text-sm text-gray-700">$215,000</td>
-                  <td class="px-6 py-3.5"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Anulada</span></td>
-                  <td class="px-6 py-3.5 text-sm text-gray-500">Ayer, 11:00</td>
+                <tr>
+                  <td colspan="5" class="px-6 py-8 text-center text-gray-400">
+                    Cargando ventas recientes...
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -343,7 +333,7 @@
         </div>
 
         <!-- Acciones rápidas -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div class="px-6 py-4 border-b border-gray-100">
             <h2 class="font-semibold text-gray-900">Acciones Rápidas</h2>
           </div>
@@ -394,6 +384,7 @@
             </a>
           </div>
         </div>
+      </div>
       </div>
     </main>
 

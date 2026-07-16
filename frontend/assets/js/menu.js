@@ -25,4 +25,31 @@ document.addEventListener('DOMContentLoaded', function () {
       sidebar.classList.add('-translate-x-full');
     }
   });
+
+  // ── User Profile Dropdown ───────────────────────────────────────────────────────
+  const userMenuBtn = document.getElementById('userMenuBtn');
+  const userDropdown = document.getElementById('userDropdown');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  if (userMenuBtn && userDropdown) {
+    userMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('hidden');
+    });
+
+    // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+        userDropdown.classList.add('hidden');
+      }
+    });
+  }
+
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('gestivoryx_user');
+      localStorage.removeItem('gestivoryx_token');
+      window.location.href = 'login.html';
+    });
+  }
 });

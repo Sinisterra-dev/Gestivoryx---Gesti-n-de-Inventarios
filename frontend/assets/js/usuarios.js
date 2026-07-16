@@ -1,6 +1,38 @@
 /**
  * Gestivoryx – Módulo de Usuarios (solo admin)
  */
+
+// ── IMMEDIATE ADMIN ROLE CHECK ─────────────────────────────────────────────────────
+// Check role BEFORE DOMContentLoaded to prevent any data leakage
+(function() {
+  const userStr = localStorage.getItem('gestivoryx_user');
+  if (!userStr) {
+    console.warn("⛔ No user found in localStorage");
+    return;
+  }
+  
+  try {
+    const user = JSON.parse(userStr);
+    if (!user || user.rol !== "admin") {
+      console.warn("⛔ Acceso denegado: Usuario no es administrador");
+      document.body.innerHTML = `
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; background:#f3f4f6;">
+          <div style="text-align:center; padding:2rem; background:white; border-radius:1rem; box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);">
+            <svg style="width:4rem; height:4rem; color:#ef4444; margin-bottom:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <h2 style="font-size:1.5rem; font-weight:600; color:#1f2937; margin-bottom:0.5rem;">Acceso Denegado</h2>
+            <p style="color:#6b7280; margin-bottom:1.5rem;">No tienes permisos de administrador para ver esta sección.</p>
+            <button onclick="window.location.href='dashboard.html'" style="padding:0.75rem 1.5rem; background:#0891b2; color:white; border:none; border-radius:0.5rem; cursor:pointer; font-weight:500;">Volver al Dashboard</button>
+          </div>
+        </div>`;
+      throw new Error("Acceso denegado: No es administrador");
+    }
+  } catch (e) {
+    console.error("Error parsing user data:", e);
+  }
+})();
+
 function safeGetValue(id) {
   const el = document.getElementById(id);
   if (!el) {
@@ -19,28 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   const currentUser = getUser();
-
-  // ── STRICT ADMIN ROLE CHECK ─────────────────────────────────────────────────
-  // Verificar rol ANTES de cualquier petición API para evitar fuga de datos
-  if (!currentUser || currentUser.rol !== "admin") {
-    console.warn("⛔ Acceso denegado: Usuario no es administrador");
-    // Limpiar contenido inmediatamente
-    document.body.innerHTML = `
-      <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #f3f4f6; flex-direction: column; font-family: Inter, sans-serif;">
-        <div style="text-align: center; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-          <svg style="width: 4rem; height: 4rem; color: #ef4444; margin-bottom: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-          </svg>
-          <h2 style="font-size: 1.5rem; font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">Acceso Denegado</h2>
-          <p style="color: #6b7280; margin-bottom: 1.5rem;">No tienes permisos para acceder a esta página.</p>
-          <a href="dashboard.html" style="display: inline-block; padding: 0.75rem 1.5rem; background: #0891b2; color: white; border-radius: 0.5rem; text-decoration: none; font-weight: 500;">
-            Ir al Dashboard
-          </a>
-        </div>
-      </div>
-    `;
-    return; // Detener ejecución
-  }
+  console.log("👤 Usuario actual cargado:", currentUser);
 
   let usuarios = [];
 

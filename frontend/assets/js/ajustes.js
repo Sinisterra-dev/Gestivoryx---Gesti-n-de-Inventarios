@@ -8,8 +8,19 @@ document.addEventListener("DOMContentLoaded", async function () {
     el.addEventListener("click", (e) => { e.preventDefault(); logout(); });
   });
 
-  const currentUser = getUser();
-  console.log("👤 Usuario actual cargado:", currentUser);
+  // ── Get current user from localStorage ─────────────────────────────────────────────
+  const userStr = localStorage.getItem('gestivoryx_user');
+  let currentUser = null;
+  if (userStr) {
+    try {
+      currentUser = JSON.parse(userStr);
+      console.log("👤 Usuario actual cargado desde localStorage:", currentUser);
+    } catch (e) {
+      console.error("❌ Error al parsear usuario de localStorage:", e);
+    }
+  } else {
+    console.error("❌ No se encontró usuario en localStorage");
+  }
 
   // ── Cargar datos iniciales ───────────────────────────────────────────────────────
   async function loadInitialData() {
@@ -92,9 +103,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (formCambiarPassword) {
     formCambiarPassword.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const currentPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(1)').value;
-      const newPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(2)').value;
-      const confirmPassword = formCambiarPassword.querySelector('input[type="password"]:nth-of-type(3)').value;
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
 
       console.log("🔐 Intentando cambiar contraseña");
       console.log("Usuario actual:", currentUser);
