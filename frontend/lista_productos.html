@@ -135,7 +135,7 @@
   <div id="main-content" class="ml-64 flex flex-col min-h-screen">
 
     <!-- Encabezado de la página -->
-    <header class="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+    <header class="bg-white border-b border-gray-100 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between sticky top-0 z-20">
       <div class="flex items-center gap-4">
         <button id="menu-toggle" class="p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors md:hidden">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -146,11 +146,14 @@
         </div>
       </div>
       <div class="relative">
-        <button id="userMenuBtn" class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100 focus:outline-none">
-          <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <button id="userMenuBtn" class="flex items-center gap-2 focus:outline-none">
+          <span class="text-sm text-gray-500 hidden sm:block">Bienvenido,</span>
+          <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100">
+            <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </div>
+            <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
           </div>
-          <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
         </button>
         <!-- Dropdown Menu -->
         <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
@@ -172,58 +175,51 @@
       </div>
     </header>
 
-    <main class="flex-1 p-6 space-y-6">
+    <main class="flex-1 py-6 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto space-y-6">
 
       <!-- Tarjetas de resumen de productos -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div class="flex items-center gap-3 mb-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
             </div>
-            <div>
-              <p class="text-2xl font-bold text-gray-900" id="cardTotalProductos">-</p>
-              <p class="text-xs text-gray-500">Total Productos</p>
-            </div>
           </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardTotalProductos">-</p>
+          <p class="text-sm text-gray-500 mt-0.5">Total Productos</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div class="flex items-center gap-3 mb-2">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <div>
-              <p class="text-2xl font-bold text-gray-900" id="cardEnStock">-</p>
-              <p class="text-xs text-gray-500">En Stock</p>
-            </div>
           </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardEnStock">-</p>
+          <p class="text-sm text-gray-500 mt-0.5">En Stock</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div class="flex items-center gap-3 mb-2">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
             </div>
-            <div>
-              <p class="text-2xl font-bold text-gray-900" id="cardBajoStock">-</p>
-              <p class="text-xs text-gray-500">Bajo Stock</p>
-            </div>
           </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardBajoStock">-</p>
+          <p class="text-sm text-gray-500 mt-0.5">Bajo Stock</p>
         </div>
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <div class="flex items-center gap-3 mb-2">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
             <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
               <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </div>
-            <div>
-              <p class="text-2xl font-bold text-gray-900" id="cardAgotados">-</p>
-              <p class="text-xs text-gray-500">Agotados</p>
-            </div>
           </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardAgotados">-</p>
+          <p class="text-sm text-gray-500 mt-0.5">Agotados</p>
         </div>
       </div>
 
       <!-- Tabla de productos -->
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100">
         <!-- Barra de herramientas: búsqueda y botón nuevo producto -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 py-4 border-b border-gray-100">
           <div class="relative flex-1 max-w-xs">
@@ -371,6 +367,7 @@
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </main>
 
