@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestivoryx — Usuarios | Gestión de Accesos y Roles</title>
 
   <!-- ═══════════════════════ SEO ═══════════════════════ -->
   <!-- Primary Meta Tags -->
-  <meta name="description" content="Gestión de usuarios y roles en Gestivoryx — administra el acceso al sistema, crea cuentas y asigna permisos de administrador o usuario estándar.">
-  <meta name="keywords" content="gestión usuarios, roles permisos, control acceso, administración cuentas, Gestivoryx, sinisterradev">
-  <meta name="author" content="Alexander Sinisterra — sinisterradev | www.sinisterradev.com">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://www.sinisterradev.com/gestivoryx/usuarios.html">
+  <meta name="description" content="Gestión de usuarios y roles en Gestivoryx — administra el acceso al sistema, crea cuentas y asigna permisos de administrador o usuario estándar." />
+  <meta name="keywords" content="gestión usuarios, roles permisos, control acceso, administración cuentas, Gestivoryx, sinisterradev" />
+  <meta name="author" content="Alexander Sinisterra — sinisterradev | www.sinisterradev.com" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.sinisterradev.com/gestivoryx/usuarios.html" />
   <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Gestivoryx">
-  <meta property="og:url" content="https://www.sinisterradev.com/gestivoryx/usuarios.html">
-  <meta property="og:title" content="Gestivoryx — Gestión de Usuarios">
-  <meta property="og:description" content="Administra usuarios y roles en Gestivoryx. Crea cuentas y asigna permisos de administrador o usuario estándar.">
-  <meta property="og:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png">
-  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gestivoryx" />
+  <meta property="og:url" content="https://www.sinisterradev.com/gestivoryx/usuarios.html" />
+  <meta property="og:title" content="Gestivoryx — Gestión de Usuarios" />
+  <meta property="og:description" content="Administra usuarios y roles en Gestivoryx. Crea cuentas y asigna permisos de administrador o usuario estándar." />
+  <meta property="og:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png" />
+  <meta property="og:locale" content="es_ES" />
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@sinisterradev">
-  <meta name="twitter:creator" content="@sinisterradev">
-  <meta name="twitter:title" content="Gestivoryx — Gestión de Usuarios">
-  <meta name="twitter:description" content="Administra usuarios y roles en Gestivoryx. Crea cuentas y asigna permisos de administrador o usuario estándar.">
-  <meta name="twitter:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@sinisterradev" />
+  <meta name="twitter:creator" content="@sinisterradev" />
+  <meta name="twitter:title" content="Gestivoryx — Gestión de Usuarios" />
+  <meta name="twitter:description" content="Administra usuarios y roles en Gestivoryx. Crea cuentas y asigna permisos de administrador o usuario estándar." />
+  <meta name="twitter:image" content="https://www.sinisterradev.com/gestivoryx/assets/img/og-gestivoryx.png" />
   <!-- Theme & App Meta -->
-  <meta name="theme-color" content="#0f172a">
-  <meta name="application-name" content="Gestivoryx">
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="application-name" content="Gestivoryx" />
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
@@ -51,161 +51,146 @@
   </script>
   <!-- ═══════════════════════════════════════════════════ -->
 
-  <!-- Fuente Inter de Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome 6 para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Fuente Inter de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Estilos personalizados del tema -->
+  <link rel="stylesheet" href="assets/css/tailwind-theme.css" />
   <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 overflow-x-hidden">
 
-  <!-- Barra lateral de navegación -->
+  <!-- ============================================================
+       Barra lateral de navegación fija con fondo oscuro
+       ============================================================ -->
   <aside id="sidebar" class="fixed inset-y-0 left-0 w-64 bg-slate-900 z-30 flex flex-col transition-transform duration-300">
 
-    <!-- Logo y marca -->
-    <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-700/50">
+    <!-- Logotipo de Gestivoryx -->
+    <div class="flex items-center gap-3 px-6 py-5 border-b border-slate-800">
       <div class="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
         </svg>
       </div>
       <span class="text-white font-bold text-lg tracking-tight">Gestivoryx</span>
     </div>
 
-    <!-- Panel del usuario autenticado -->
-    <div class="px-3 py-4 border-b border-slate-700/50">
+    <!-- Panel de usuario — clases requeridas por api.js: .user-name y .user-role -->
+    <div class="px-6 py-4 border-b border-slate-800">
       <div class="flex items-center gap-3">
         <div class="w-9 h-9 bg-slate-700 rounded-full flex items-center justify-center flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+          <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
         </div>
         <div class="min-w-0">
-          <p class="user-name text-sm font-medium text-white truncate">Admin</p>
-          <p class="user-role text-xs text-slate-400 truncate">Administrador</p>
+          <p class="user-name text-sm font-medium text-white truncate">Cargando...</p>
+          <p class="user-role text-xs text-slate-400">Usuario</p>
         </div>
       </div>
     </div>
 
     <!-- Menú de navegación principal -->
-    <nav class="flex-1 px-3 py-4 overflow-y-auto">
-      <ul class="space-y-0.5">
+    <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto scrollbar-hide">
 
-        <!-- Dashboard -->
-        <li>
-          <a href="admin.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
-            <span>Dashboard</span>
-          </a>
-        </li>
+      <!-- Dashboard -->
+      <a href="admin.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span class="text-sm font-medium">Dashboard</span>
+      </a>
 
-        <!-- Productos -->
-        <li>
-          <a href="lista_productos.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-            </svg>
-            <span>Productos</span>
-          </a>
-        </li>
+      <!-- Productos -->
+      <a href="lista_productos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        </svg>
+        <span class="text-sm font-medium">Productos</span>
+      </a>
 
-        <!-- Categorías -->
-        <li>
-          <a href="categorias.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-            </svg>
-            <span>Categorías</span>
-          </a>
-        </li>
+      <!-- Categorías -->
+      <a href="categorias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        <span class="text-sm font-medium">Categorías</span>
+      </a>
 
-        <!-- Proveedores -->
-        <li>
-          <a href="proveedores.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
-            </svg>
-            <span>Proveedores</span>
-          </a>
-        </li>
+      <!-- Proveedores -->
+      <a href="proveedores.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+        </svg>
+        <span class="text-sm font-medium">Proveedores</span>
+      </a>
 
-        <!-- Clientes -->
-        <li>
-          <a href="clientes.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-            </svg>
-            <span>Clientes</span>
-          </a>
-        </li>
+      <!-- Clientes -->
+      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span class="text-sm font-medium">Clientes</span>
+      </a>
 
-        <!-- Ventas -->
-        <li>
-          <a href="ventas.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-            <span>Ventas</span>
-          </a>
-        </li>
+      <!-- Ventas -->
+      <a href="ventas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        <span class="text-sm font-medium">Ventas</span>
+      </a>
 
-        <!-- Movimientos -->
-        <li>
-          <a href="movimientos.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-            </svg>
-            <span>Movimientos</span>
-          </a>
-        </li>
+      <!-- Movimientos -->
+      <a href="movimientos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+        </svg>
+        <span class="text-sm font-medium">Movimientos</span>
+      </a>
 
-        <!-- Usuarios (elemento activo) -->
-        <li>
-          <a href="usuarios.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-cyan-400 bg-cyan-500/20 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-            <span>Usuarios</span>
-          </a>
-        </li>
+      <!-- Usuarios (activo en esta página) -->
+      <a href="usuarios.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-cyan-400 bg-slate-800 border-l-2 border-cyan-400 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <span class="text-sm font-medium">Usuarios</span>
+      </a>
 
-        <!-- Ajustes -->
-        <li>
-          <a href="ajustes.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors text-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.572c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.065-2.572c-1.543.94-3.31-.826-2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <span>Ajustes</span>
-          </a>
-        </li>
-
-      </ul>
+      <!-- Ajustes -->
+      <a href="ajustes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span class="text-sm font-medium">Ajustes</span>
+      </a>
     </nav>
 
-    <!-- Botón de cierre de sesión -->
-    <div class="px-3 py-4 border-t border-slate-700/50">
-      <a href="login.html" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors text-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+    <!-- Botón de cerrar sesión -->
+    <div class="px-4 py-4 border-t border-slate-800">
+      <button onclick="logout()" class="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
         </svg>
-        <span>Cerrar Sesión</span>
-      </a>
+        <span class="text-sm font-medium">Cerrar Sesión</span>
+      </button>
     </div>
-
   </aside>
-  <!-- Fin barra lateral -->
 
-  <!-- Contenido principal desplazado por el sidebar -->
+  <!-- ============================================================
+       Contenido principal desplazado a la derecha del sidebar
+       ============================================================ -->
   <div id="main-content" class="ml-64 flex flex-col min-h-screen">
 
-    <!-- Cabecera superior -->
-    <header class="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
+    <!-- Encabezado superior de la página -->
+    <header class="bg-white border-b border-gray-100 px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between sticky top-0 z-20">
+      <!-- Botón para alternar el sidebar en móviles + Título de la página -->
       <div class="flex items-center gap-4">
         <button id="menu-toggle" class="p-2 rounded-xl text-gray-500 hover:bg-gray-100 transition-colors md:hidden">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,20 +202,25 @@
           <p class="text-xs text-gray-500">Gestión de usuarios del sistema</p>
         </div>
       </div>
+
+      <!-- Información del usuario en el header -->
       <div class="relative">
-        <button id="userMenuBtn" class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100 focus:outline-none">
-          <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-            </svg>
+        <button id="userMenuBtn" class="flex items-center gap-2 focus:outline-none">
+          <span class="text-sm text-gray-500 hidden sm:block">Bienvenido,</span>
+          <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100">
+            <div class="w-7 h-7 bg-cyan-500 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
           </div>
-          <span class="user-name text-sm font-medium text-gray-700">Usuario</span>
         </button>
         <!-- Dropdown Menu -->
-        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
+        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
           <a href="ajustes.html" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.572c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.065-2.572c-1.543.94-3.31-.826-2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
             Ajustes
@@ -246,128 +236,124 @@
       </div>
     </header>
 
-    <!-- Área de contenido de la página -->
+    <!-- Contenido principal de la página Usuarios -->
     <main class="flex-1 py-6 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto space-y-6">
 
-        <!-- Tarjetas de estadísticas -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <!-- ── Fila de tarjetas de estadísticas ── -->
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-          <!-- Tarjeta: Total de Usuarios -->
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-              </div>
-            </div>
-            <p class="text-2xl font-bold text-gray-900" id="cardTotalUsuarios">--</p>
-            <p class="text-sm text-gray-500 mt-0.5">Total Usuarios</p>
-          </div>
-
-          <!-- Tarjeta: Administradores -->
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
-              </div>
-            </div>
-            <p class="text-2xl font-bold text-gray-900" id="cardAdmins">--</p>
-            <p class="text-sm text-gray-500 mt-0.5">Administradores</p>
-          </div>
-
-          <!-- Tarjeta: Usuarios regulares -->
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center">
-                <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                </svg>
-              </div>
-            </div>
-            <p class="text-2xl font-bold text-gray-900" id="cardRegulares">--</p>
-            <p class="text-sm text-gray-500 mt-0.5">Usuarios</p>
-          </div>
-
-          <!-- Tarjeta placeholder for 4-column grid -->
-          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
-            <div class="flex items-center justify-between mb-3">
-              <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
-                </svg>
-              </div>
-            </div>
-            <p class="text-2xl font-bold text-gray-900">--</p>
-            <p class="text-sm text-gray-500 mt-0.5">Sistema</p>
-          </div>
-
-        </div>
-        <!-- Fin tarjetas de estadísticas -->
-
-        <!-- Tarjeta contenedora de la tabla de usuarios -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-
-          <!-- Encabezado de la tabla -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-6 py-4 border-b border-gray-100">
-            <h2 class="text-base font-semibold text-gray-900">Lista de Usuarios</h2>
-            <button onclick="document.getElementById('modalAgregarUsuario').classList.remove('hidden')"
-              class="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+        <!-- Tarjeta: Total de Usuarios -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
-              Nuevo Usuario
-            </button>
+            </div>
+            <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+5.2%</span>
           </div>
-
-          <!-- Contenedor con scroll horizontal para la tabla -->
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-                  <th class="px-6 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                </tr>
-              </thead>
-              <!-- Cuerpo principal de la tabla; JS puede usar tablaUsuarios o tablaUsuariosBody como referencia -->
-              <tbody id="tablaUsuarios" class="divide-y divide-gray-100">
-                <tr>
-                  <td colspan="7" class="px-6 py-8 text-center text-gray-400">
-                    Cargando usuarios...
-                  </td>
-                </tr>
-              </tbody>
-              <!-- Elemento fantasma vacío: alias de compatibilidad para scripts que busquen tablaUsuariosBody.
-                   El tbody principal es tablaUsuarios; este elemento nunca contiene filas visibles. -->
-              <tbody id="tablaUsuariosBody" class="hidden" aria-hidden="true"></tbody>
-            </table>
-          </div>
-
+          <p class="text-2xl font-bold text-gray-900" id="cardTotalUsuarios">--</p>
+          <p class="text-sm text-gray-500 mt-0.5">Total Usuarios</p>
         </div>
-        <!-- Fin tabla de usuarios -->
 
+        <!-- Tarjeta: Administradores -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+8.1%</span>
+          </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardAdmins">--</p>
+          <p class="text-sm text-gray-500 mt-0.5">Administradores</p>
+        </div>
+
+        <!-- Tarjeta: Usuarios regulares -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-cyan-100 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+12.8%</span>
+          </div>
+          <p class="text-2xl font-bold text-gray-900" id="cardRegulares">--</p>
+          <p class="text-sm text-gray-500 mt-0.5">Usuarios</p>
+        </div>
+
+        <!-- Tarjeta: Sistema -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 min-h-[144px]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+              <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+              </svg>
+            </div>
+            <span class="text-xs font-medium text-red-600 bg-red-50 px-2 py-0.5 rounded-full">Alerta</span>
+          </div>
+          <p class="text-2xl font-bold text-gray-900">--</p>
+          <p class="text-sm text-gray-500 mt-0.5">Sistema</p>
+        </div>
+      </div>
+
+      <!-- ── Tabla de usuarios ── -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+
+        <!-- Encabezado de la tabla -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-6 py-4 border-b border-gray-100">
+          <h2 class="font-semibold text-gray-900">Lista de Usuarios</h2>
+          <button onclick="document.getElementById('modalAgregarUsuario').classList.remove('hidden')"
+            class="flex items-center gap-2 px-4 py-2 bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium rounded-xl transition-colors shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+            Nuevo Usuario
+          </button>
+        </div>
+
+        <!-- Contenedor con scroll horizontal para la tabla -->
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-gray-50">
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">ID</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Nombre</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Username</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Email</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Rol</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Estado</th>
+                <th class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-3">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaUsuarios" class="divide-y divide-gray-50">
+              <tr>
+                <td colspan="7" class="px-6 py-8 text-center text-gray-400">
+                  Cargando usuarios...
+                </td>
+              </tr>
+            </tbody>
+            <!-- Elemento fantasma vacío: alias de compatibilidad para scripts que busquen tablaUsuariosBody -->
+            <tbody id="tablaUsuariosBody" class="hidden" aria-hidden="true"></tbody>
+          </table>
+        </div>
+
+      </div>
       </div>
     </main>
 
     <!-- Pie de página -->
-    <footer class="bg-white border-t border-gray-100 px-6 py-4">
-      <p class="text-sm text-gray-500 text-center">
-        &copy; 2025 <span class="font-medium text-gray-700">Gestivoryx</span>. Todos los derechos reservados.
-      </p>
+    <footer class="px-6 py-4 border-t border-gray-100 bg-white">
+      <p class="text-xs text-gray-400 text-center">© 2024 Gestivoryx · Sistema de Gestión de Inventarios</p>
     </footer>
-
   </div>
-  <!-- Fin contenido principal -->
 
-  <!-- Modal: Agregar Usuario -->
+  <!-- ============================================================
+       Modal: Agregar Usuario
+       ============================================================ -->
   <div id="modalAgregarUsuario" class="fixed inset-0 z-50 bg-black/50 items-center justify-center p-4 hidden">
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg">
 
@@ -444,7 +430,7 @@
   </div>
   <!-- Fin modal Agregar Usuario -->
 
-  <!-- Scripts de la aplicación -->
+  <!-- Scripts -->
   <script src="assets/js/api.js"></script>
   <script src="assets/js/menu.js"></script>
   <script src="assets/js/usuarios.js"></script>
