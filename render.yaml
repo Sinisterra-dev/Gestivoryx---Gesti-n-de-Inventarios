@@ -12,10 +12,6 @@ services:
       - key: ALLOWED_ORIGINS
         value: "*"
       - key: DATABASE_URL
-        value: "sqlite:////data/gestivoryx.db"
+        value: "sqlite:///./gestivoryx.db"
       - key: SECRET_KEY
-        generateValue: true
-    disk:
-      name: gestivoryx-data
-      mountPath: /data
-      sizeGB: 1
+      - generateValue: true
