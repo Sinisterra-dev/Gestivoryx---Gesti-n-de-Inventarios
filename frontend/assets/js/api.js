@@ -4,7 +4,7 @@
  */
 
 // API base URL — change this to match your deployment environment
-const API_BASE = window.GESTIVORYX_API_URL || "http://localhost:8000";
+const API_BASE = window.GESTIVORYX_API_URL || "https://gestivoryx.onrender.com";
 
 // ── Token helpers ────────────────────────────────────────────────────────────
 
