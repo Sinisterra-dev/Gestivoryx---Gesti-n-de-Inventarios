@@ -14,4 +14,4 @@ services:
       - key: DATABASE_URL
         value: "sqlite:///./gestivoryx.db"
       - key: SECRET_KEY
-      - generateValue: true
+        generateValue: true  # <--- Fíjate que va alineado y sin el guion (-) al lado
