@@ -11,14 +11,37 @@ def poblar_datos():
     conn = conectar_db()
     cursor = conn.cursor()
     
-    print("⏳ Limpiando datos antiguos para evitar duplicados...")
-    cursor.execute("DELETE FROM detalle_ventas")
+    print("⏳ Limpiando las 8 tablas para evitar duplicados...")
+    cursor.execute("DELETE FROM detalles_venta")
+    cursor.execute("DELETE FROM movimientos")
     cursor.execute("DELETE FROM ventas")
     cursor.execute("DELETE FROM productos")
     cursor.execute("DELETE FROM clientes")
     cursor.execute("DELETE FROM proveedores")
+    cursor.execute("DELETE FROM categorias")
+    cursor.execute("DELETE FROM usuarios")
     
-    # 1. Insertar Proveedores Realistas
+    # 1. Insertar Usuario Administrador para la sesión de la Demo
+    print("👤 Insertando usuarios...")
+    # Nota: Si tus columnas se llaman diferente (ej. contrasena, email), se ajustan aquí
+    try:
+        cursor.execute(
+            "INSERT INTO usuarios (nombre, rol) VALUES (?, ?)", 
+            ("ALEX", "Administrador")
+        )
+    except sqlite3.OperationalError:
+        # Por si tu tabla tiene campos obligatorios como email/password
+        cursor.execute(
+            "INSERT INTO usuarios (nombre, rol, email, password) VALUES (?, ?, ?, ?)", 
+            ("ALEX", "Administrador", "alex@gestivoryx.com", "123456")
+        )
+    
+    # 2. Insertar Categorías Independientes
+    print("🗂️ Insertando categorías...")
+    categorias = [("Accesorios",), ("Electrónica",), ("Almacenamiento",), ("Oficina",)]
+    cursor.executemany("INSERT INTO categorias (nombre) VALUES (?)", categorias)
+
+    # 3. Insertar Proveedores
     print("📦 Insertando proveedores...")
     proveedores = [
         ("Tech Distribution S.A.S.", "Carlos Mendoza", "3157894512"),
@@ -31,13 +54,11 @@ def poblar_datos():
         proveedores
     )
     
-    # Obtener IDs de proveedores generados
     cursor.execute("SELECT id FROM proveedores")
     proveedor_ids = [row[0] for row in cursor.fetchall()]
 
-    # 2. Insertar Productos con Margen de Ganancia Lógico
-    print("💻 Insertando catálogo de productos...")
-    # Formato: (Nombre, Categoría, Stock Inicial, Precio Compra, Precio Venta, Proveedor_ID)
+    # 4. Insertar Catálogo de Productos e Historial de Movimientos (Entradas Iniciales)
+    print("💻 Insertando productos y registrando entradas de inventario...")
     productos_plantilla = [
         ("Mouse Ergonómico Inalámbrico", "Accesorios", 45, 15.00, 29.99),
         ("Teclado Mecánico RGB", "Accesorios", 20, 45.00, 79.90),
@@ -51,19 +72,32 @@ def poblar_datos():
         ("Escritorio Elevable Manual", "Oficina", 5, 120.00, 199.99)
     ]
     
-    productos = []
+    fecha_inicial = (datetime.now() - timedelta(days=45)).strftime("%Y-%m-%d %H:%M:%S")
+    
     for p in productos_plantilla:
-        # Asigna un proveedor aleatorio de los que acabamos de insertar
         prov_id = random.choice(proveedor_ids)
-        productos.append((p[0], p[1], p[2], p[3], p[4], prov_id))
+        # Insertar producto
+        cursor.execute(
+            "INSERT INTO productos (nombre, categoria, stock, precio_compra, precio_venta, proveedor_id) VALUES (?, ?, ?, ?, ?, ?)",
+            (p[0], p[1], p[2], p[3], p[4], prov_id)
+        )
+        prod_id = cursor.lastrowid
         
-    cursor.executemany(
-        "INSERT INTO productos (nombre, categoria, stock, precio_compra, precio_venta, proveedor_id) VALUES (?, ?, ?, ?, ?, ?)",
-        productos
-    )
+        # REGISTRO DE MOVIMIENTO: Entrada Inicial de Stock
+        try:
+            cursor.execute(
+                "INSERT INTO movimientos (producto_id, tipo, cantidad, fecha, motivo) VALUES (?, ?, ?, ?, ?)",
+                (prod_id, "Entrada", p[2], fecha_inicial, "Carga inicial de inventario")
+            )
+        except sqlite3.OperationalError:
+            # Por si tus columnas se llaman tipo_movimiento o descripcion
+            cursor.execute(
+                "INSERT INTO movimientos (producto_id, tipo_movimiento, cantidad, fecha, descripcion) VALUES (?, ?, ?, ?, ?)",
+                (prod_id, "Entrada", p[2], fecha_inicial, "Carga inicial de inventario")
+            )
 
-    # 3. Insertar Clientes
-    print("👥 Insertando clientes de prueba...")
+    # 5. Insertar Clientes
+    print("👥 Insertando clientes...")
     clientes = [
         ("Alejandro Sinisterra", "alex@correo.com", "3120001122"),
         ("Claudia Restrepo", "claudia.r@outlook.com", "3165554433"),
@@ -76,58 +110,65 @@ def poblar_datos():
         clientes
     )
     
-    # Obtener IDs de clientes y productos para armar las ventas
     cursor.execute("SELECT id FROM clientes")
     cliente_ids = [row[0] for row in cursor.fetchall()]
     
-    cursor.execute("SELECT id, precio_venta, stock FROM productos")
-    productos_db = cursor.fetchall() # Lista de tuplas (id, precio_venta, stock)
+    cursor.execute("SELECT id, precio_venta, nombre FROM productos")
+    productos_db = cursor.fetchall()
 
-    # 4. Generar Ventas Históricas Dinámicas (Últimos 30 días)
-    print("📈 Generando historial de ventas dinámico...")
+    # 6. Generar Ventas e Historial de Movimientos (Salidas por Ventas)
+    print("📈 Generando historial dinámico de ventas y salidas de stock...")
     hoy = datetime.now()
-    
-    # Vamos a generar entre 20 y 30 transacciones distribuidas en el tiempo
-    num_ventas = random.randint(20, 30)
+    num_ventas = random.randint(25, 35)
     
     for _ in range(num_ventas):
         cliente_id = random.choice(cliente_ids)
-        # Genera una fecha aleatoria en los últimos 30 días para simular actividad real
         dias_atras = random.randint(0, 30)
-        horas_atras = random.randint(8, 18) # Horario laboral simulado
+        horas_atras = random.randint(8, 18)
         fecha_venta = (hoy - timedelta(days=dias_atras)).replace(hour=horas_atras, minute=random.randint(0, 59))
         fecha_str = fecha_venta.strftime("%Y-%m-%d %H:%M:%S")
         
-        # Insertar la cabecera de la venta temporalmente con total 0
+        # Insertar cabecera de venta
         cursor.execute(
             "INSERT INTO ventas (cliente_id, fecha, total) VALUES (?, ?, ?)",
             (cliente_id, fecha_str, 0)
         )
         venta_id = cursor.lastrowid
         
-        # Determinar cuántos productos diferentes lleva este cliente en esta compra (1 a 3)
         items_en_venta = random.randint(1, 3)
         productos_seleccionados = random.sample(productos_db, items_en_venta)
         
         total_venta = 0
-        for prod_id, precio_venta, stock in productos_seleccionados:
-            cantidad = random.randint(1, 2) # Compras al por menor normales
+        for prod_id, precio_venta, nombre_prod in productos_seleccionados:
+            cantidad = random.randint(1, 2)
             subtotal = cantidad * precio_venta
             total_venta += subtotal
             
-            # Registrar el detalle
+            # Insertar detalle de venta
             cursor.execute(
-                "INSERT INTO detalle_ventas (venta_id, producto_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)",
+                "INSERT INTO detalles_venta (venta_id, producto_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)",
                 (venta_id, prod_id, cantidad, precio_venta)
             )
             
-            # Descontar del stock físico para simular consistencia en el inventario
+            # Descontar del stock del producto
             cursor.execute(
                 "UPDATE productos SET stock = stock - ? WHERE id = ?",
                 (cantidad, prod_id)
             )
             
-        # Actualizar el total real de la cabecera de la venta
+            # REGISTRO DE MOVIMIENTO: Salida por Venta
+            try:
+                cursor.execute(
+                    "INSERT INTO movimientos (producto_id, tipo, cantidad, fecha, motivo) VALUES (?, ?, ?, ?, ?)",
+                    (prod_id, "Salida", cantidad, fecha_str, f"Venta registrada ##{venta_id}")
+                )
+            except sqlite3.OperationalError:
+                cursor.execute(
+                    "INSERT INTO movimientos (producto_id, tipo_movimiento, cantidad, fecha, descripcion) VALUES (?, ?, ?, ?, ?)",
+                    (prod_id, "Salida", cantidad, fecha_str, f"Venta registrada ##{venta_id}")
+                )
+            
+        # Actualizar total de la venta
         cursor.execute(
             "UPDATE ventas SET total = ? WHERE id = ?",
             (total_venta, venta_id)
@@ -135,7 +176,9 @@ def poblar_datos():
 
     conn.commit()
     conn.close()
-    print("✅ ¡Base de datos poblada con éxito para la demo!")
+    print("\n=======================================================")
+    print("✅ ¡Las 8 tablas han sido pobladas con éxito absoluto!")
+    print("=======================================================\n")
 
 if __name__ == "__main__":
     poblar_datos()
