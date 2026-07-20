@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: gestivoryx-backend
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: ALGORITHM
+        value: "HS256"
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: DATABASE_URL
+        value: "sqlite:////data/gestivoryx.db"
+      - key: SECRET_KEY
+        generateValue: true
+    disk:
+      name: gestivoryx-data
+      mountPath: /data
+      sizeGB: 1
