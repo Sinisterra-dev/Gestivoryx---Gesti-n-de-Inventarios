@@ -140,12 +140,22 @@
             </svg>
             Iniciar Sesión
           </button>
+
+          <!-- ⚡ Botón de Acceso Rápido / Demo (NUEVO) -->
+          <button
+            type="button"
+            id="btnDemo"
+            class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 px-4 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2 text-xs border border-slate-200"
+          >
+            <i class="fa-solid fa-bolt text-amber-500"></i>
+            Probar Credenciales de Demo (admin)
+          </button>
         </form>
       </div>
 
       <!-- Pie de la tarjeta -->
       <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 text-center">
-        <p class="text-xs text-gray-400">© 2024 Gestivoryx · Todos los derechos reservados</p>
+        <p class="text-xs text-gray-400">© 2026 Gestivoryx · Todos los derechos reservados</p>
       </div>
     </div>
   </div>
@@ -157,6 +167,25 @@
     if (typeof getToken === 'function' && getToken()) {
       window.location.href = 'admin.html';
     }
+
+    // ⚡ Lógica para el botón de Demo / Acceso Rápido
+    document.getElementById('btnDemo').addEventListener('click', function() {
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      usernameInput.value = 'admin';
+      passwordInput.value = 'admin123';
+
+      // Efecto visual rápido en el botón para mostrar que se cargó
+      const originalText = this.innerHTML;
+      this.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> ¡Credenciales cargadas!`;
+      this.classList.add('bg-emerald-50', 'border-emerald-200', 'text-emerald-700');
+
+      setTimeout(() => {
+        this.innerHTML = originalText;
+        this.classList.remove('bg-emerald-50', 'border-emerald-200', 'text-emerald-700');
+      }, 1500);
+    });
 
     // Manejar envío del formulario de inicio de sesión
     document.getElementById('loginForm').addEventListener('submit', async function (e) {
