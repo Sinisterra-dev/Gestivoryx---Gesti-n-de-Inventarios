@@ -243,7 +243,7 @@ No está permitido copiar, redistribuir, sublicenciar ni usar este código con f
 
 ## 👤 Autor
 
-**Alexander Sinisterra**  
+**Alexander Sinisterra**  **Claudia Rojas**
 Estudiante de Ingeniería en Sistemas  
 Desarrollador backend en Python  
 Proyecto personal con proyección comercial
