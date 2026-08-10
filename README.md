@@ -37,13 +37,14 @@ Incluye una API REST completa con autenticación JWT, control de roles y un fron
 - **SQLAlchemy 2.x** – ORM
 - **SQLite** – base de datos (sin dependencias externas)
 - **Pydantic v2** – validación de datos
-- **python-** – generación y verificación de JWT
+- **python-jose** – generación y verificación de JWT
 - **passlib + bcrypt** – hashing de contraseñas
 - **Uvicorn** – servidor ASGI
 
 ### Frontend
 - **HTML / CSS / JavaScript** (vanilla)
-- Páginas: login, admin, productos, categorías, proveedores, clientes, ventas, usuarios, ajustes
+- Ubicación: carpeta `docs/`
+- Páginas: login (index.html), admin, productos, categorías, proveedores, clientes, ventas, movimientos, usuarios, ajustes
 
 ---
 
@@ -76,18 +77,24 @@ Gestivoryx/
 │   ├── tests/
 │   │   └── test_api.py          # Tests de integración
 │   ├── requirements.txt
-│   └── .env.example
-└── frontend/
-    ├── login.html
-    ├── admin.html
-    ├── lista_productos.html
-    ├── categorias.html
-    ├── proveedores.html
-    ├── clientes.html
-    ├── ventas.html
-    ├── usuarios.html
-    ├── ajustes.html
-    └── assets/
+│   ├── .env.example
+│   ├── seed_demo.py             # Script para cargar datos de demostración
+│   ├── forzar_usuario.py        # Script para crear/resetear usuario admin
+│   └── ver_tablas.py            # Script para inspeccionar tablas de la BD
+├── docs/                        # Frontend (HTML/CSS/JS estático)
+│   ├── index.html               # Página de login
+│   ├── admin.html               # Panel administrativo
+│   ├── lista_productos.html     # Gestión de productos
+│   ├── categorias.html          # Gestión de categorías
+│   ├── proveedores.html         # Gestión de proveedores
+│   ├── clientes.html            # Gestión de clientes
+│   ├── ventas.html              # Gestión de ventas
+│   ├── movimientos.html         # Historial de movimientos
+│   ├── usuarios.html            # Gestión de usuarios
+│   ├── ajustes.html             # Configuración del sistema
+│   └── assets/                  # CSS, JS e imágenes
+├── INSTRUCCIONES_DEMO.md        # Guía de despliegue para demo
+└── README.md
 ```
 
 ---
@@ -138,6 +145,22 @@ uvicorn app.main:app --reload --port 3000
 La API estará disponible en: **http://localhost:3000**  
 Documentación interactiva (Swagger): **http://localhost:3000/docs**
 
+### Scripts de utilidad
+
+El proyecto incluye scripts auxiliares en la carpeta `backend/`:
+
+- **seed_demo.py**: Carga datos de demostración (productos, categorías, proveedores, clientes, ventas)
+- **forzar_usuario.py**: Crea o resetea el usuario administrador
+- **ver_tablas.py**: Muestra el contenido de las tablas de la base de datos
+
+Uso:
+```bash
+cd backend
+python seed_demo.py          # Cargar datos de demo
+python forzar_usuario.py     # Resetear usuario admin
+python ver_tablas.py         # Ver contenido de la BD
+```
+
 ### Usuario administrador por defecto
 
 | Campo    | Valor      |
@@ -147,6 +170,16 @@ Documentación interactiva (Swagger): **http://localhost:3000/docs**
 | Rol      | admin      |
 
 > ⚠️ Cambiar la contraseña del admin en producción.
+
+---
+
+## 🌐 Despliegue en producción
+
+Para instrucciones detalladas de despliegue en servicios como Render, Railway o Vercel, consulta el archivo **INSTRUCCIONES_DEMO.md** que incluye:
+- Configuración del backend en la nube
+- Despliegue del frontend estático
+- Conexión entre frontend y backend
+- Checklist de verificación para demo
 
 ---
 
