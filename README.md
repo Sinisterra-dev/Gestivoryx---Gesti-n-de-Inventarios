@@ -9,7 +9,7 @@ Incluye una API REST completa con autenticación JWT, control de roles y un fron
 
 - **Estado:** WIP (en evolución activa hacia producción)
 - **Propósito:** MVP para PYMEs → evolución a producto comercial
-- **Propietario:** Alexander Sinisterra
+- **Propietario:** Alexander Sinisterra - Claudia Rojas
 
 ---
 

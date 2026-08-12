@@ -2,43 +2,77 @@
 Tests de integración para la API Gestivoryx.
 Usa una base de datos SQLite en memoria para no afectar datos reales.
 """
+# Importa pytest para escribir tests y definir fixtures
 import pytest
+# Importa TestClient de FastAPI para simular requests HTTP a la API
 from fastapi.testclient import TestClient
+# Importa create_engine de SQLAlchemy para crear motor de base de datos para tests
 from sqlalchemy import create_engine
+# Importa sessionmaker para crear fábrica de sesiones de base de datos
 from sqlalchemy.orm import sessionmaker
+# Importa StaticPool para pool de conexiones estático (necesario para SQLite en memoria)
 from sqlalchemy.pool import StaticPool
 
+# Importa Base y get_db del módulo database
+# Base: clase base de modelos ORM para crear tablas
+# get_db: dependencia de FastAPI que inyecta sesión de base de datos
 from app.database import Base, get_db
+# Importa app de main.py para crear el cliente de tests
 from app.main import app
 
 # ── Test database (in-memory) ──────────────────────────────────────────────────
+# URL de base de datos SQLite en memoria
+# La base de datos en memoria existe solo mientras el proceso está activo
+# Esto asegura que los tests no afecten la base de datos de desarrollo
 TEST_DATABASE_URL = "sqlite://"
 
+# Crea el motor de base de datos para tests
+# connect_args={"check_same_thread": False}: permite acceso desde múltiples hilos
+# poolclass=StaticPool: usa un pool estático (necesario para SQLite en memoria)
 engine_test = create_engine(
     TEST_DATABASE_URL,
     connect_args={"check_same_thread": False},
     poolclass=StaticPool,
 )
+# Crea fábrica de sesiones para tests
+# autocommit=False: las transacciones no se confirman automáticamente
+# autoflush=False: los cambios no se envían a la BD hasta hacer flush() o commit()
+# bind=engine_test: vincula la sesión al motor de tests
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine_test)
 
 
+# Función que sobrescribe la dependencia get_db para usar la base de datos de tests
+# Esto permite que los endpoints usen la base de datos en memoria en lugar de la real
 def override_get_db():
+    # Crea una sesión de base de datos de tests
     db = TestingSessionLocal()
     try:
+        # Yield la sesión para que el endpoint la use
         yield db
     finally:
+        # Cierra la sesión después de que el endpoint termine
+        # Se ejecuta tanto si el test tiene éxito como si falla
         db.close()
 
 
+# Fixture de pytest que crea un cliente de tests con base de datos en memoria
+# scope="module" significa que se ejecuta una vez por módulo (no por cada test)
 @pytest.fixture(scope="module")
 def client():
+    # Crea todas las tablas en la base de datos de tests
+    # Base.metadata contiene la metadata de todos los modelos importados
     Base.metadata.create_all(bind=engine_test)
+    # Sobrescribe la dependencia get_db para usar override_get_db
+    # Esto hace que todos los endpoints usen la BD en memoria
     app.dependency_overrides[get_db] = override_get_db
-    # Seed admin user for tests
+    # Crea usuario admin para tests (seed inicial)
+    # Importa funciones necesarias dentro del fixture para evitar importaciones circulares
     from app.core.security import hash_password
     from app.models.models import Usuario
 
+    # Crea sesión de base de datos de tests
     db = TestingSessionLocal()
+    # Crea usuario admin con credenciales de test
     admin = Usuario(
         username="admin",
         email="admin@test.com",
@@ -46,25 +80,39 @@ def client():
         rol="admin",
         hashed_password=hash_password("admin123"),
     )
+    # Agrega el usuario a la sesión y confirma
     db.add(admin)
     db.commit()
+    # Cierra la sesión
     db.close()
 
+    # Crea cliente de tests con la aplicación FastAPI
+    # with statement asegura que el cliente se cierre después de los tests
     with TestClient(app) as c:
+        # Yield el cliente para que los tests lo usen
         yield c
 
+    # Limpieza después de todos los tests del módulo
+    # Elimina todas las tablas de la base de datos de tests
     Base.metadata.drop_all(bind=engine_test)
+    # Limpia las sobrescrituras de dependencias
     app.dependency_overrides.clear()
 
 
+# Fixture de pytest que obtiene headers de autenticación para tests
+# scope="module" se ejecuta una vez por módulo
 @pytest.fixture(scope="module")
 def auth_headers(client):
+    # Usa el cliente de tests para hacer login
     resp = client.post(
         "/api/auth/login",
         data={"username": "admin", "password": "admin123"},
     )
+    # Verifica que el login fue exitoso
     assert resp.status_code == 200
+    # Extrae el token JWT de la respuesta
     token = resp.json()["access_token"]
+    # Retorna headers con el token Bearer para usar en tests autenticados
     return {"Authorization": f"Bearer {token}"}
 
 
