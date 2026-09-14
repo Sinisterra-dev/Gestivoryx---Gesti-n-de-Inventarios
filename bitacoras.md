@@ -703,14 +703,42 @@ Se realizaron pruebas completas del flujo de venta:
 - Validaciones de integridad de stock
 
 ## Evidencias que podrían utilizarse
-- Código de ventas.py
-- Código de movimientos.py
-- Código de dashboard.py
-- Capturas de Swagger UI con endpoints complejos
-- Capturas de pruebas de flujo de venta completo
-- Capturas de dashboard con estadísticas
-- Commit de Git: "Implementación de lógica de negocio: ventas, movimientos y dashboard"
-- Registros en base de datos mostrando movimientos generados
+- **Código de `ventas.py`**
+  1. Abrir `backend/app/routers/ventas.py`.
+  2. Ubicar `@router.post("/")` y la lógica de validación de stock/descuento.
+  3. Tomar captura donde se vea el endpoint y la lógica principal.
+- **Código de `movimientos.py`**
+  1. Abrir `backend/app/routers/movimientos.py`.
+  2. Ubicar el registro de movimientos y campos de trazabilidad.
+  3. Tomar captura del bloque de creación/listado.
+- **Código de `dashboard.py`**
+  1. Abrir `backend/app/routers/dashboard.py`.
+  2. Ubicar `@router.get("/stats")` y los cálculos agregados.
+  3. Tomar captura mostrando el endpoint y las métricas.
+- **Captura de Swagger UI con endpoint complejo (`/api/ventas/`)**
+  1. Entrar a `http://127.0.0.1:8000/docs`.
+  2. Ejecutar `POST /api/auth/login` y copiar el `access_token`.
+  3. Pulsar **Authorize** y pegar el token JWT obtenido en el login.
+  4. Abrir `POST /api/ventas/`, usar un body con varios ítems en `detalles`, descuento y cliente.
+  5. Ejecutar y tomar captura del request + response 200/201.
+- **Captura de prueba de flujo de venta completo**
+  1. Crear/validar producto con stock (`POST /api/productos/`).
+  2. Registrar venta (`POST /api/ventas/`).
+  3. Consultar stock actualizado (`GET /api/productos/` o `GET /api/productos/{id}`).
+  4. Verificar movimiento generado (`GET /api/movimientos/`).
+  5. Anular venta (`DELETE /api/ventas/{id}`) y volver a consultar movimientos/stock.
+  6. Tomar capturas de cada paso clave.
+- **Captura de dashboard con estadísticas**
+  1. Con datos cargados, ejecutar `GET /api/dashboard/stats`.
+  2. Verificar totales de ventas, inventario y métricas relacionadas.
+  3. Tomar captura del JSON de respuesta.
+- **Commit de Git**
+  1. Ejecutar `git log --oneline --grep="Implementación de lógica de negocio: ventas, movimientos y dashboard"`.
+  2. Tomar captura donde aparezca el hash y mensaje.
+- **Registros en BD mostrando movimientos**
+  1. Abrir SQLite (`sqlite3 backend/gestivoryx.db` o DB Browser).
+  2. Ejecutar `SELECT * FROM movimientos_inventario ORDER BY fecha_movimiento DESC LIMIT 20;`.
+  3. Tomar captura donde se vea tipo, cantidad, stock anterior y nuevo.
 
 ---
 
@@ -801,13 +829,32 @@ Se verificó el funcionamiento completo del flujo de login:
 - Flujo completo de login: desde ingreso de credenciales hasta redirección
 
 ## Evidencias que podrían utilizarse
-- Estructura de carpetas docs/
-- Código de api.js
-- Código de index.html
-- Capturas de la página de login
-- Capturas del localStorage con token almacenado
-- Capturas de redirección tras login exitoso
-- Commit de Git: "Desarrollo inicial del frontend: página de login"
+- **Estructura de carpetas `docs/`**
+  1. Abrir explorador del proyecto en `docs/`.
+  2. Expandir `assets/css`, `assets/js`, `assets/img`.
+  3. Tomar captura del árbol completo.
+- **Código de `api.js`**
+  1. Abrir `docs/assets/js/api.js`.
+  2. Ubicar `API_BASE`, `getToken()/setToken()` y `apiCall()`.
+  3. Tomar captura de esas secciones.
+- **Código de `index.html` (login)**
+  1. Abrir `docs/index.html`.
+  2. Ubicar formulario de login y script de envío.
+  3. Tomar captura del HTML + JS de autenticación.
+- **Captura de página de login**
+  1. Levantar frontend.
+  2. Entrar a la ruta principal (`index.html`).
+  3. Tomar captura de pantalla completa.
+- **Captura de `localStorage` con token**
+  1. Iniciar sesión con usuario válido.
+  2. Abrir DevTools → Application/Storage → Local Storage.
+  3. Tomar captura mostrando token y datos de usuario.
+- **Captura de redirección tras login exitoso**
+  1. Después del login, verificar llegada a `admin.html`.
+  2. Tomar captura donde se vea el panel y el usuario autenticado.
+- **Commit de Git**
+  1. Ejecutar `git log --oneline --grep="Desarrollo inicial del frontend: página de login"`.
+  2. Tomar captura del commit encontrado.
 
 ---
 
@@ -920,11 +967,25 @@ Se integraron todos los módulos con la API utilizando el módulo api.js previam
 - Interfaces responsivas y consistentes
 
 ## Evidencias que podrían utilizarse
-- Código de admin.html, lista_productos.html, categorias.html, proveedores.html, clientes.html
-- Código de productos.js, categorias.js, proveedores.js, clientes.js, menu.js, dashboard.js
-- Capturas de cada página del frontend
-- Capturas de operaciones CRUD realizadas
-- Commit de Git: "Desarrollo de módulos de gestión del frontend"
+- **Código de páginas frontend**
+  1. Abrir `docs/admin.html`, `docs/lista_productos.html`, `docs/categorias.html`, `docs/proveedores.html`, `docs/clientes.html`.
+  2. En cada archivo, ubicar tabla/listado y formulario modal.
+  3. Tomar una captura por archivo mostrando su bloque principal.
+- **Código JavaScript de módulos**
+  1. Abrir `docs/assets/js/productos.js`, `categorias.js`, `proveedores.js`, `clientes.js`, `menu.js`, `dashboard.js`.
+  2. Ubicar funciones CRUD y carga de datos.
+  3. Tomar capturas de las funciones clave por módulo.
+- **Capturas de cada página del frontend**
+  1. Iniciar sesión.
+  2. Navegar a cada módulo desde el menú lateral.
+  3. Tomar una captura de cada vista (admin, productos, categorías, proveedores, clientes).
+- **Capturas de operaciones CRUD**
+  1. Crear un registro en cada módulo y capturar mensaje de éxito.
+  2. Editar un registro y capturar el resultado en tabla.
+  3. Eliminar (soft delete) y capturar actualización del listado.
+- **Commit de Git**
+  1. Ejecutar `git log --oneline --grep="Desarrollo de módulos de gestión del frontend"`.
+  2. Tomar captura con hash y mensaje.
 
 ---
 
@@ -1072,14 +1133,39 @@ Se realizaron pruebas de integración completa:
 - Funcionalidades validadas y operativas
 
 ## Evidencias que podrían utilizarse
-- Código de ventas.html, movimientos.html, usuarios.html, ajustes.html
-- Código de ventas.js, movimientos.js, usuarios.js, ajustes.js
-- Código de seed_demo.py, forzar_usuario.py, ver_tablas.py
-- Código de test_api.py
-- Capturas de ejecución de pytest
-- Capturas de sistema con datos de demo
-- Capturas de flujo completo de venta
-- Commit de Git: "Desarrollo de módulos restantes y tests de integración"
+- **Código de páginas (`ventas.html`, `movimientos.html`, `usuarios.html`, `ajustes.html`)**
+  1. Abrir cada archivo en `docs/`.
+  2. Ubicar componentes principales (tabla, formularios, filtros, acciones).
+  3. Tomar captura de cada estructura.
+- **Código JavaScript (`ventas.js`, `movimientos.js`, `usuarios.js`, `ajustes.js`)**
+  1. Abrir archivos en `docs/assets/js/`.
+  2. Ubicar funciones de cálculo de venta, filtros de movimientos y control de roles.
+  3. Tomar captura de funciones clave.
+- **Scripts (`seed_demo.py`, `forzar_usuario.py`, `ver_tablas.py`)**
+  1. Abrir scripts en `backend/`.
+  2. Mostrar la parte de carga de datos, creación de admin e inspección de tablas.
+  3. Tomar captura de cada script.
+- **Código de `tests/test_api.py`**
+  1. Abrir `backend/tests/test_api.py`.
+  2. Ubicar tests de auth, productos y ventas.
+  3. Tomar captura de los casos más representativos.
+- **Captura de ejecución de `pytest`**
+  1. Ejecutar `cd backend && pytest -v`.
+  2. Esperar resumen final.
+  3. Tomar captura donde se vean pruebas aprobadas/fallidas y totales.
+- **Capturas del sistema con datos de demo**
+  1. Ejecutar script de seed.
+  2. Abrir frontend y validar tablas con datos precargados.
+  3. Tomar capturas de productos, clientes y ventas con datos reales.
+- **Captura de flujo de venta completo (complejo)**
+  1. Login como admin.
+  2. Crear venta con varios productos y descuento.
+  3. Confirmar cálculo de subtotales/total.
+  4. Guardar venta y capturar detalle final.
+  5. Verificar reflejo en movimientos y dashboard; capturar evidencias.
+- **Commit de Git**
+  1. Ejecutar `git log --oneline --grep="Desarrollo de módulos restantes y tests de integración"`.
+  2. Tomar captura del commit.
 
 ---
 
@@ -1189,15 +1275,41 @@ Se preparó el sistema para su presentación como proyecto de etapa productiva:
 - Variables de entorno configuradas correctamente
 
 ## Evidencias que podrían utilizarse
-- URL del backend en producción: https://gestivoryx.onrender.com
-- URL del frontend en producción: [POR CONFIRMAR]
-- Capturas del sistema desplegado en producción
-- Capturas de la documentación Swagger en producción
-- Archivo INSTRUCCIONES_DEMO.md
-- Configuración de Render (capturas o export)
-- Configuración de Vercel (capturas o export)
-- README.md actualizado con instrucciones de despliegue
-- Commit de Git: "Despliegue en producción"
+- **URL backend en producción (`https://gestivoryx.onrender.com`)**
+  1. Abrir la URL en navegador.
+  2. Verificar respuesta del servicio.
+  3. Tomar captura de la página/respuesta activa.
+- **URL frontend en producción**
+  1. Abrir la URL final desplegada (cuando esté confirmada).
+  2. Verificar que cargue login y navegación.
+  3. Tomar captura de la URL visible y la interfaz.
+- **Capturas del sistema desplegado**
+  1. Iniciar sesión en producción.
+  2. Navegar por módulos principales.
+  3. Tomar capturas de flujo real en ambiente productivo.
+- **Capturas de Swagger en producción**
+  1. Entrar a `https://gestivoryx.onrender.com/docs`.
+  2. Autorizar con JWT.
+  3. Ejecutar endpoint relevante (ej. `GET /api/dashboard/stats` o `POST /api/ventas/`) y capturar respuesta.
+- **Archivo `INSTRUCCIONES_DEMO.md`**
+  1. Abrir el archivo en el repositorio.
+  2. Mostrar secciones de despliegue backend/frontend.
+  3. Tomar captura de las instrucciones clave.
+- **Configuración de Render**
+  1. Entrar al panel del servicio en Render.
+  2. Mostrar Start Command y variables de entorno.
+  3. Tomar captura ocultando valores sensibles.
+- **Configuración de Vercel**
+  1. Entrar al proyecto en Vercel.
+  2. Mostrar dominio, build settings y despliegue exitoso.
+  3. Tomar captura del estado de deploy.
+- **README actualizado**
+  1. Abrir `README.md`.
+  2. Ubicar sección de despliegue/uso en producción.
+  3. Tomar captura de ese bloque.
+- **Commit de Git**
+  1. Ejecutar `git log --oneline --grep="Despliegue en producción"`.
+  2. Tomar captura del hash y mensaje.
 
 ---
 
